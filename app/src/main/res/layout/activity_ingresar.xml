@@ -7,16 +7,57 @@
     tools:context=".IngresarActivity"
     android:background="@drawable/degradado">
 
-        <TextView
-            android:id="@+id/guambitos"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Güambitos"
-            android:textColor="@color/colorPrimary"
-            android:textSize="50sp"
-            android:layout_marginTop="100dp"
-            android:gravity="center"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp">
+
+
+                <TextView
+                    android:id="@+id/guambitos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Güambitos"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="50sp"
+                    android:layout_marginTop="100dp"
+                    android:gravity="center"
+                    android:textStyle="bold" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/boton_redondo">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/usuario_id"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="@drawable/texto_boton_redondo"
+                            android:hint="Nombre de usuario"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <Button
+                    android:id="@+id/boton_ingresar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/boton_redondo"
+                    android:text="Ingresar"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:padding="10dp"
+                    android:textColor="@drawable/texto_boton_redondo"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    />
+
+        </LinearLayout>
 
 
 
