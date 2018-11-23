@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IngresarActivity">
+    tools:context=".IngresarActivity"
+    android:background="@drawable/degradado">
 
         <TextView
+            android:id="@+id/guambitos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Güambitos"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorPrimary"
             android:textSize="50sp"
             android:layout_marginTop="100dp"
             android:gravity="center"
