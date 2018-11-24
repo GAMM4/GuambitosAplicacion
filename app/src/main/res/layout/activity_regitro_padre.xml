@@ -15,6 +15,7 @@
         android:orientation="vertical"
         >
         <TextView
+            android:id="@+id/Registro"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:hint="REGISTRO"
@@ -35,6 +36,7 @@
             android:layout_marginLeft="25dp">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/nombre_padre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -42,7 +44,7 @@
                     android:hint="Nombre del Padre"
                     android:textStyle="bold"
                     android:textSize="20dp"
-                    />
+                    android:paddingHorizontal="20dp"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -52,16 +54,17 @@
             android:background="@drawable/boton_redondo_negro"
             android:textColorHint="@color/colorPrimaryDark"
             android:layout_marginTop="10dp"
-
             android:layout_marginRight="25dp"
             android:layout_marginLeft="25dp">
 
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/documento_identidad_padre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="Documento de Identidad"
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    android:paddingHorizontal="20dp">
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -75,11 +78,13 @@
             android:layout_marginLeft="25dp">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/crear_contraseña"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Crear Contraseña"
                 android:textSize="20dp"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword"
+                android:paddingHorizontal="20dp"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -93,10 +98,12 @@
             android:layout_marginLeft="25dp">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/pregunta_seguridad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Pregunta de seguridad"
-                android:textSize="20dp"/>
+                android:textSize="20dp"
+                android:paddingHorizontal="20dp"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -111,13 +118,16 @@
             android:layout_marginLeft="25dp">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/respuesta_pregunta_seguridad"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:hint="Tu Respuesta"
-                android:textSize="20dp"/>
+                android:textSize="20dp"
+                android:paddingHorizontal="20dp"/>
         </android.support.design.widget.TextInputLayout>
 
         <TextView
+            android:id="@+id/codigo"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
@@ -126,8 +136,7 @@
             android:layout_marginTop="20dp"
             android:hint="Este es tu codigo: "
             android:textSize="30dp"
-
-           />
+            android:paddingHorizontal="20dp"           />
 
         <TextView
             android:layout_width="match_parent"
@@ -140,6 +149,7 @@
             android:layout_marginTop="5dp"/>
 
         <Button
+            android:id="@+id/boton_siguiente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Siguiente"
