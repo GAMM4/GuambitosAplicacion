@@ -74,6 +74,28 @@
 
                 </android.support.design.widget.TextInputLayout>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="¿Olvidaste tu contraseña?"
+                            android:textColor="@android:color/white"/>
+
+                        <TextView
+                            android:id="@+id/olvido_clave"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="clic aqui"
+                            android:layout_marginLeft="4dp"
+                            android:textColor="@android:color/white"/>
+
+                </LinearLayout>
 
                 <Button
                     android:id="@+id/boton_redondo_blanco"
@@ -86,7 +108,7 @@
                     android:padding="10dp"
                     android:textColor="@drawable/texto_boton_redondo"
                     android:gravity="center_horizontal"
-                    android:layout_marginTop="60dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"/>
 
@@ -106,6 +128,7 @@
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
                     />
+
 
         </LinearLayout>
 
