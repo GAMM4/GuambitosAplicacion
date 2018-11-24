@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegitroPadreActivity"
+    android:background="@drawable/degradado">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:hint="REGISTRO"
+            android:textSize="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:background="@drawable/boton_redondo_blanco"
+            android:theme="@style/BotonTextoBlanco"
+            android:layout_marginTop="60dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:hint="Nombre del Padre"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/boton_redondo_blanco"
+            android:theme="@style/BotonTextoBlanco"
+            android:layout_marginTop="20dp">
+
+
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Documento de Identidad"
+                    android:textSize="20dp"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/boton_redondo_blanco"
+            android:theme="@style/BotonTextoBlanco"
+            android:layout_marginTop="20dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Crear Contraseña"
+                android:textSize="20dp"
+                android:inputType="textPassword"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/boton_redondo_blanco"
+            android:theme="@style/BotonTextoBlanco"
+            android:layout_marginTop="20dp"
+            android:hint="Este es tu codigo: "
+            android:textSize="30dp"
+
+           />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:hint="Siguiente"
+            android:textSize="30dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_gravity="center"
+            android:background="@drawable/boton_redondo_blanco"
+            android:theme="@style/BotonTextoBlanco"
+            android:layout_marginTop="40dp"
+            />
+
+
+
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
