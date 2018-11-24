@@ -17,7 +17,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegistroActivity" />
-        <activity android:name=".RegitroPadreActivity"></activity>
+        <activity android:name=".RegitroPadreActivity" />
+        <activity
+            android:name=".InicioPadresActivity"
+            android:label="@string/title_activity_inicio_padres"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
