@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegistroActivity"
-    android:background="@drawable/degradado">
+>
 
 
     <LinearLayout
@@ -43,14 +43,15 @@
             android:id="@+id/boton_padre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/boton_redondo_blanco"
+            android:background="@drawable/boton_redondo_relleno"
             android:text="PADRE"
             android:textSize="20dp"
             android:textStyle="bold"
             android:padding="10dp"
             android:textColor="@drawable/texto_boton_redondo"
+            android:textColorHint="@color/colorPrimaryDark"
             android:gravity="center_horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="50dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp" />
 
@@ -58,7 +59,7 @@
             android:id="@+id/boton_medico"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/boton_redondo_blanco"
+            android:background="@drawable/boton_redondo_relleno"
             android:text="MEDICO"
             android:textSize="20dp"
             android:textStyle="bold"
