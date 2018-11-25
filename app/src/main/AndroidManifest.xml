@@ -21,7 +21,9 @@
         <activity
             android:name=".InicioPadresActivity"
             android:label="@string/title_activity_inicio_padres"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".HijosPadreActivity" />
+        <activity android:name=".HijoMenuActivity"></activity>
     </application>
 
 </manifest>
