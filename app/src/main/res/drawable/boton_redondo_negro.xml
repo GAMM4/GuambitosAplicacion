@@ -4,6 +4,7 @@
 
     <corners android:radius="150dp"/>
     <stroke android:width="2dp"
-        android:color="@android:color/black"/>
+        android:color="@color/editText2"
+        />
 
 </shape>

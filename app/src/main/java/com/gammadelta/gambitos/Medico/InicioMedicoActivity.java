@@ -1,7 +1,9 @@
-package com.gammadelta.gambitos;
+package com.gammadelta.gambitos.Medico;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.gammadelta.gambitos.R;
 
 public class InicioMedicoActivity extends AppCompatActivity {
 

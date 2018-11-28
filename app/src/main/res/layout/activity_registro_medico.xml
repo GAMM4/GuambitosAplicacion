@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Registro.RegistroMedicoActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/texto_medico_independiente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="MEDICO INDEPENDIENTE"
+                android:textSize="25sp"
+                android:textColor="@color/colorPrimary"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp">
+            </TextView>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/boton_redondo_negro"
+                android:textColorHint="@color/editText2"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="25dp"
+                app:hintEnabled="false">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/nombre_medico"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@null"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:hint="Nombre"
+                    android:textSize="@dimen/size_edittext" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/boton_redondo_negro"
+                android:textColorHint="@color/editText2"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="25dp"
+                app:hintEnabled="false">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tarjeta_profesional"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@null"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:hint="Numero de tarjeta profesional"
+                    android:textSize="@dimen/size_edittext"
+                    android:paddingHorizontal="20dp"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/registro_medico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Registrar"
+                android:textSize="@dimen/size_botones"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:background="@drawable/boton_redondo_relleno"
+                android:textColor="@drawable/texto_boton_redondo"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="80dp"/>
+
+            <TextView
+                android:id="@+id/texto_covenios"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CONVENIOS"
+                android:textSize="25sp"
+                android:textColor="@color/colorPrimary"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:layout_marginTop="30dp">
+            </TextView>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/boton_redondo_negro"
+                android:textColorHint="@color/editText2"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="25dp"
+                app:hintEnabled="false">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/numero_convenio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@null"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:hint="Numero del convenio"
+                    android:textSize="@dimen/size_edittext"
+                    android:paddingHorizontal="20dp"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/boton_redondo_negro"
+                android:textColorHint="@color/editText2"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="25dp"
+                app:hintEnabled="false">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/documento_identidad_medico"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@null"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:hint="Documento de identidad"
+                    android:textSize="@dimen/size_edittext"
+                    android:paddingHorizontal="20dp"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/ingresar_convenio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ingresar"
+                android:textStyle="bold"
+                android:textSize="@dimen/size_botones"
+                android:textColor="@drawable/texto_boton_redondo"
+                android:layout_gravity="center"
+                android:background="@drawable/boton_redondo_relleno"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="80dp"
+                android:layout_marginBottom="30dp"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

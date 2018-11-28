@@ -1,13 +1,15 @@
-package com.gammadelta.gambitos;
+package com.gammadelta.gambitos.Registro;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MedicoPadreActivity extends AppCompatActivity {
+import com.gammadelta.gambitos.R;
+
+public class RegistroMedicoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_medico_padre);
+        setContentView(R.layout.activity_registro_medico);
     }
 }

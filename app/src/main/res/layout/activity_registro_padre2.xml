@@ -1,201 +1,256 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistroPadre2Activity">
+    tools:context=".Registro.RegistroPadre2Activity">
 
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:hint="123456"
-            android:textSize="25dp"
+            android:id="@+id/registra_tuhijo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="REGISTRA TU HIJO"
+            android:textSize="25sp"
             android:textColor="@color/colorPrimaryDark"
-            android:layout_gravity="right"
-            android:background="@drawable/boton_redondo_negro"
-            android:theme="@style/BotonTextoBlanco"
+            android:textAlignment="gravity"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="5dp"
-            android:paddingHorizontal="20dp">
-
-        </TextView>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Registra tu hijo"
-            android:textSize="30dp"
-            android:textAlignment="center"
-            android:textStyle="bold"/>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="@drawable/boton_redondo_negro"
-            android:textColorHint="@color/colorPrimaryDark"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginLeft="25dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Nombre del hijo"
-                android:textSize="20dp"
-                android:paddingHorizontal="20dp"/>
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="@drawable/boton_redondo_negro"
-            android:textColorHint="@color/colorPrimaryDark"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginLeft="25dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Documento de identidad"
-                android:textSize="20dp"
-                android:paddingHorizontal="20dp"/>
-
-        </android.support.design.widget.TextInputLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="30dp"
-                android:paddingHorizontal="20dp"
-                android:hint="Niño"
-                android:textSize="30dp"
-                android:background="@drawable/boton_redondo_relleno"
-                android:textColor="@color/colorPrimaryDark"
-                android:theme="@style/BotonTextoBlanco" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="30dp"
-                android:paddingHorizontal="20dp"
-                android:background="@drawable/boton_redondo_relleno"
-                android:hint="Niña"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="30dp"
-                android:theme="@style/BotonTextoBlanco" />
-
-        </LinearLayout>
+            android:textStyle="bold"
+            />
 
         <TextView
+            android:id="@+id/pin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Fecha de nacimiento"
-            android:layout_marginTop="10dp"
-            android:textSize="20dp"
-            android:layout_marginLeft="30dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:theme="@style/BotonTextoBlanco"
-            android:layout_marginRight="30dp"/>
+            android:text="132435"
+            android:textSize="22sp"
+            android:layout_alignRight="@+id/registra_tuhijo"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:layout_gravity="right"
+            android:background="@drawable/toolbar_pin"
+            android:paddingRight="10dp"
+            android:paddingLeft="15dp"
+            android:paddingBottom="7dp"
+            android:paddingTop="7dp"/>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="45dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="10dp">
+            android:orientation="vertical">
 
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <android.support.design.widget.TextInputEditText
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:background="@drawable/boton_redondo_negro"
-                android:hint="Dia"
-                android:padding="10dp"
-                android:textColorHint="@color/colorPrimaryDark" />
-
-        </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:textColorHint="@color/editText2"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="25dp">
 
                 <android.support.design.widget.TextInputEditText
-                    android:layout_width="90dp"
+                    android:id="@+id/nombre_hijo"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/boton_redondo_negro"
-                    android:hint="Mes"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@null"
                     android:padding="10dp"
-                    android:textColorHint="@color/colorPrimaryDark" />
+                    android:singleLine="true"
+                    android:hint="Nombre del hijo"
+                    android:textSize="@dimen/size_edittext"
+                    android:paddingHorizontal="20dp"/>
 
             </android.support.design.widget.TextInputLayout>
+
             <android.support.design.widget.TextInputLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:id="@+id/documento_identidad_hijo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/boton_redondo_negro"
+                android:textColorHint="@color/editText2"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="25dp">
 
                 <android.support.design.widget.TextInputEditText
-                    android:layout_width="90dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/boton_redondo_negro"
-                    android:hint="Año"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@null"
                     android:padding="10dp"
-                    android:textColorHint="@color/colorPrimaryDark" />
+                    android:singleLine="true"
+                    android:hint="Documento de identidad"
+                    android:textSize="20dp"
+                    android:paddingHorizontal="20dp"/>
 
             </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_weight="1">
+
+
+                    <TextView
+                        android:id="@+id/nino"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_marginTop="30dp"
+                        android:paddingRight="20dp"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:layout_marginRight="1dp"
+                        android:paddingHorizontal="20dp"
+                        android:text="Niño"
+                        android:textStyle="bold"
+                        android:padding="10dp"
+                        android:textSize="@dimen/size_botones"
+                        android:background="@drawable/boton_redondo_relleno_nino"
+                        android:textColor="@drawable/texto_boton_redondo"/>
+
+                    <TextView
+                        android:id="@+id/nina"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_marginTop="30dp"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:layout_marginLeft="1dp"
+                        android:paddingHorizontal="20dp"
+                        android:background="@drawable/boton_redondo_relleno_nina"
+                        android:text="Niña"
+                        android:textColor="@drawable/texto_boton_redondo"
+                        android:textSize="@dimen/size_botones"
+                        android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Fecha de nacimiento"
+                android:layout_marginTop="10dp"
+                android:textSize="20dp"
+                android:layout_marginLeft="30dp"
+                android:textColor="@color/editText2"
+                android:theme="@style/BotonTextoBlanco"
+                android:layout_marginRight="30dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1">
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/fecha_dia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/boton_redondo_negro"
+                        android:hint="Dia"
+                        android:padding="10dp"
+                        android:textColorHint="@color/editText2" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/fecha_mes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/boton_redondo_negro"
+                        android:hint="Mes"
+                        android:padding="10dp"
+                        android:textColorHint="@color/editText2" />
+
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/fecha_ano"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/boton_redondo_negro"
+                        android:hint="Año"
+                        android:padding="10dp"
+                        android:textColorHint="@color/editText2" />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/boton_registro_hijo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Registrar"
+                android:textSize="@dimen/size_botones"
+                android:textColor="@drawable/texto_boton_redondo"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:background="@drawable/boton_redondo_relleno"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="80dp"/>
+
+            <Button
+                android:id="@+id/boton_agregar_otrohijo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Añadir otro hijo"
+                android:textSize="@dimen/size_botones"
+                android:textColor="@drawable/texto_boton_redondo"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:background="@drawable/boton_redondo_relleno"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="80dp"
+                android:layout_marginBottom="30dp"/>
 
         </LinearLayout>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Registrar"
-            android:textSize="25dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_gravity="center"
-            android:background="@drawable/boton_redondo_relleno"
-            android:theme="@style/BotonTextoBlanco"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginRight="80dp"/>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Añadir otro hijo"
-            android:textSize="25dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_gravity="center"
-            android:background="@drawable/boton_redondo_relleno"
-            android:theme="@style/BotonTextoBlanco"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginRight="80dp"/>
-
-    </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+    </ScrollView>
+</RelativeLayout>

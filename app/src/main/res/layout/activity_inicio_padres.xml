@@ -4,73 +4,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InicioPadresActivity">
+    tools:context=".Padre.InicioPadresActivity">
 
-    <android.support.design.widget.AppBarLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/barra"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-            <ImageView
-                android:id="@+id/menu_izquierdo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_menu"/>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
 
-            <TextView
-                android:id="@+id/guambitos"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="30dp"
-                android:text="Güambitos"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"/>
+                <ImageView
+                    android:id="@+id/menu_izquierdo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_menu"/>
 
-        </android.support.v7.widget.Toolbar>
+                <TextView
+                    android:id="@+id/guambitos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="30dp"
+                    android:text="Güambitos"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"/>
 
-    </android.support.design.widget.AppBarLayout>
+            </android.support.v7.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/nombre_padre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:background="@drawable/toolbar_nombre"
-        android:text="Juan Pablo Ramirez"
-        android:singleLine="true"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:textSize="22sp"
-        android:paddingLeft="20dp"
-        android:paddingBottom="7dp"
-        android:paddingTop="7dp"
-        />
+        </android.support.design.widget.AppBarLayout>
 
-    <TextView
-        android:id="@+id/pin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:layout_gravity="right"
-        android:background="@drawable/toolbar_pin"
-        android:text="132435"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:textSize="22sp"
-        android:paddingRight="10dp"
-        android:paddingLeft="15dp"
-        android:paddingBottom="7dp"
-        android:paddingTop="7dp"
-        />
+        <TextView
+            android:id="@+id/nombre_padre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/toolbar_nombre"
+            android:paddingLeft="20dp"
+            android:layout_below="@+id/barra"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:singleLine="true"
+            android:text="Juan Pablo Ramirez"
+            android:textColor="@android:color/white"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/pin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@drawable/toolbar_pin"
+            android:text="132435"
+            android:layout_below="@+id/barra"
+            android:layout_alignRight="@+id/nombre_padre"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:paddingRight="10dp"
+            android:paddingLeft="15dp"
+            android:paddingBottom="7dp"
+            android:paddingTop="7dp"
+            />
+
+    </RelativeLayout>
 
 
     <include layout="@layout/content_inicio_padres" />
@@ -79,7 +87,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="100dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
 

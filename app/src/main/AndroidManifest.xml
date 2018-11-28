@@ -9,21 +9,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".IngresarActivity">
+        <activity android:name=".Login.IngresarActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegistroActivity" />
-        <activity android:name=".RegitroPadreActivity" />
+
+        <activity android:name=".Registro.RegistroActivity" />
+        <activity android:name=".Registro.RegistroPadreActivity"/>
+        <activity android:name=".Registro.RegistroPadre2Activity"/>
+        <activity android:name=".Registro.RegistroMedicoActivity"/>
+
         <activity
-            android:name=".InicioPadresActivity"
+            android:name=".Padre.InicioPadresActivity"
             android:label="@string/title_activity_inicio_padres"
             android:theme="@style/AppTheme" />
-        <activity android:name=".HijosPadreActivity" />
-        <activity android:name=".HijoMenuActivity"></activity>
+
+        <activity android:name=".Medico.InicioMedicoActivity"/>
+        <activity android:name=".Medico.InicioMedico2Activity" />
+        <activity android:name=".Padre.HijoMenuActivity"/>
+
     </application>
 
 </manifest>

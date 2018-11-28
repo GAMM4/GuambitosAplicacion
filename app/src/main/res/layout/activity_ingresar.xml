@@ -4,134 +4,144 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IngresarActivity"
+    tools:context=".Login.IngresarActivity"
     android:background="@drawable/degradado">
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp">
 
 
-                <TextView
-                    android:id="@+id/guambitos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Güambitos"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="50sp"
-                    android:layout_marginTop="100dp"
-                    android:gravity="center"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/guambitos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Güambitos"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="50sp"
+                        android:layout_marginTop="100dp"
+                        android:gravity="center"
+                        android:textStyle="bold" />
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/boton_redondo_blanco"
-                    android:layout_marginTop="50dp"
-                    android:theme="@style/BotonTextoBlanco">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/boton_redondo_blanco"
+                        android:layout_marginTop="50dp"
+                        app:hintEnabled="false"
+                        android:theme="@style/BotonTextoBlanco">
 
-                        <android.support.design.widget.TextInputEditText
-                            android:id="@+id/usuario_id"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:background="@null"
-                            android:hint="Nombre de usuario"
-                            android:gravity="center_vertical"
-                            android:padding="10dp"
-                            android:textColorHint="@android:color/white"
-                            android:singleLine="true"
-                            android:textColor="@drawable/texto_boton_redondo" />
+                            <android.support.design.widget.TextInputEditText
+                                android:id="@+id/usuario_id"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@null"
+                                android:hint="Nombre de usuario"
+                                android:textSize="18sp"
+                                android:gravity="center_vertical"
+                                android:padding="10dp"
+                                android:textColorHint="@android:color/white"
+                                android:singleLine="true"
+                                android:textColor="@drawable/texto_boton_redondo" />
 
-                </android.support.design.widget.TextInputLayout>
+                    </android.support.design.widget.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/boton_redondo_blanco"
-                    android:layout_marginTop="20dp"
-                    android:theme="@style/BotonTextoBlanco">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/boton_redondo_blanco"
+                        android:layout_marginTop="20dp"
+                        android:theme="@style/BotonTextoBlanco"
+                        app:hintEnabled="false">
 
-                        <android.support.design.widget.TextInputEditText
-                            android:id="@+id/contraseña_id"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:background="@null"
-                            android:hint="Contraseña"
-                            android:gravity="center_vertical"
-                            android:inputType="textPassword"
-                            android:padding="10dp"
-                            android:singleLine="true"
-                            android:textColorHint="@android:color/white"
-                            android:textColor="@drawable/texto_boton_redondo" />
+                            <android.support.design.widget.TextInputEditText
+                                android:id="@+id/contraseña_id"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@null"
+                                android:hint="Contraseña"
+                                android:textSize="18sp"
+                                android:gravity="center_vertical"
+                                android:inputType="textPassword"
+                                android:padding="10dp"
+                                android:singleLine="true"
+                                android:textColorHint="@android:color/white"
+                                android:textColor="@drawable/texto_boton_redondo" />
 
-                </android.support.design.widget.TextInputLayout>
+                    </android.support.design.widget.TextInputLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20dp">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="20dp">
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="¿Olvidaste tu contraseña?"
-                            android:textColor="@android:color/white"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="¿Olvidaste tu contraseña?"
+                                android:textColor="@android:color/white"/>
 
-                        <TextView
-                            android:id="@+id/olvido_clave"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="clic aqui"
-                            android:layout_marginLeft="4dp"
-                            android:textColor="@android:color/white"/>
+                            <TextView
+                                android:id="@+id/olvido_clave"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="clic aqui"
+                                android:layout_marginLeft="4dp"
+                                android:textColor="@android:color/white"/>
 
-                </LinearLayout>
+                    </LinearLayout>
 
-                <Button
-                    android:id="@+id/boton_redondo_blanco"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/boton_redondo_blanco"
-                    android:textSize="20dp"
-                    android:text="Ingresar"
-                    android:textStyle="bold"
-                    android:padding="10dp"
-                    android:textColor="@drawable/texto_boton_redondo"
-                    android:gravity="center_horizontal"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"/>
-
-
-                <Button
-                    android:id="@+id/boton_crearcuenta"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/boton_redondo_blanco"
-                    android:text="Crear cuenta"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:padding="10dp"
-                    android:textColor="@drawable/texto_boton_redondo"
-                    android:gravity="center_horizontal"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    />
+                    <Button
+                        android:id="@+id/boton_redondo_blanco"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/boton_redondo_blanco"
+                        android:textSize="@dimen/size_botones"
+                        android:text="Ingresar"
+                        android:textStyle="bold"
+                        android:padding="10dp"
+                        android:textColor="@drawable/texto_boton_redondo"
+                        android:gravity="center_horizontal"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:onClick="irInicioPadre"/>
 
 
-        </LinearLayout>
+                    <Button
+                        android:id="@+id/boton_crearcuenta"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/boton_redondo_blanco"
+                        android:text="Crear cuenta"
+                        android:textSize="@dimen/size_botones"
+                        android:textStyle="bold"
+                        android:padding="10dp"
+                        android:textColor="@drawable/texto_boton_redondo"
+                        android:gravity="center_horizontal"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:onClick="irRegistro"
+                        />
 
+            </LinearLayout>
+
+    </ScrollView>
 
 
 </RelativeLayout>

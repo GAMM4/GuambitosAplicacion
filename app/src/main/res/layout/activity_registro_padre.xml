@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Registro.RegistroPadreActivity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/Registro"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="REGISTRO"
+                android:textSize="25sp"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:background="@drawable/boton_redondo_negro"
+                android:textColorHint="@color/editText2"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="25dp"
+                app:hintEnabled="false">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/nombre_padre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@null"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:hint="Nombre del Padre"
+                        android:textSize="@dimen/size_edittext"
+                        android:paddingHorizontal="20dp"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/boton_redondo_negro"
+                android:textColorHint="@color/editText2"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="25dp"
+                app:hintEnabled="false">
+
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/documento_identidad_padre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@null"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:inputType="number"
+                        android:hint="Documento de Identidad"
+                        android:textSize="@dimen/size_edittext"
+                        android:paddingHorizontal="20dp"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/boton_redondo_negro"
+                android:textColorHint="@color/editText2"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="25dp"
+                app:hintEnabled="false">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/crear_contraseña"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@null"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:hint="Crear Contraseña"
+                    android:textSize="@dimen/size_edittext"
+                    android:inputType="textPassword"
+                    android:paddingHorizontal="20dp"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/boton_redondo_negro"
+                android:textColorHint="@color/editText2"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="25dp"
+                app:hintEnabled="false">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/pregunta_seguridad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@null"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:hint="Pregunta de seguridad"
+                    android:textSize="@dimen/size_edittext"
+                    android:paddingHorizontal="20dp"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/boton_redondo_negro"
+                android:textColorHint="@color/editText2"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="25dp"
+                app:hintEnabled="false">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/respuesta_pregunta_seguridad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@null"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:hint="Tu Respuesta"
+                    android:textSize="@dimen/size_edittext"
+                    android:paddingHorizontal="20dp"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/codigo"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:textColorHint="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:hint="PIN: 132435 "
+                android:textSize="30sp"
+                android:paddingHorizontal="20dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Dale este PIN a tu doctor en el momento de la cita para que obtenga tus datos"
+                android:textSize="18sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textAlignment="center"
+                android:layout_marginTop="5dp"/>
+
+            <Button
+                android:id="@+id/boton_siguiente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Siguiente"
+                android:textSize="@dimen/size_botones"
+                android:textColor="@drawable/texto_boton_redondo"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"
+                android:background="@drawable/boton_redondo_relleno"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="30dp"
+                android:onClick="irRegistroPadre2"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

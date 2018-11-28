@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InicioMedicoActivity">
+    tools:context=".Medico.InicioMedicoActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,15 +12,14 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/texto_medico_independiente"
+            android:id="@+id/texto_consulta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="MEDICO INDEPENDIENTE"
+            android:hint="Consulta técnica del paciente"
             android:textSize="30dp"
             android:textAlignment="center"
             android:textStyle="bold"
-            android:layout_marginTop="10dp">
-        </TextView>
+            android:layout_marginTop="50dp"/>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -28,16 +27,15 @@
             android:layout_gravity="center"
             android:background="@drawable/boton_redondo_negro"
             android:textColorHint="@color/colorPrimaryDark"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="50dp"
             android:layout_marginRight="25dp"
             android:layout_marginLeft="25dp">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/nombre_medico"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nombre"
-                android:textSize="20dp"
+                android:hint="Documento de identidad del padre"
+                android:textSize="18dp"
                 android:paddingHorizontal="20dp"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -53,80 +51,13 @@
             android:layout_marginLeft="25dp">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/tarjeta_profesional"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Numero de tarjeta profesional"
+                android:hint="Pin del padre"
                 android:textSize="20dp"
                 android:paddingHorizontal="20dp"/>
 
         </android.support.design.widget.TextInputLayout>
-
-        <Button
-            android:id="@+id/Registro"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Registrar"
-            android:textSize="25dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_gravity="center"
-            android:background="@drawable/boton_redondo_relleno"
-            android:theme="@style/BotonTextoBlanco"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginRight="80dp"/>
-
-        <TextView
-            android:id="@+id/texto_covenios"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="CONVENIOS"
-            android:textSize="30dp"
-            android:textAlignment="center"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp">
-        </TextView>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="@drawable/boton_redondo_negro"
-            android:textColorHint="@color/colorPrimaryDark"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginLeft="25dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/numero_convenio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Numero del convenio"
-                android:textSize="20dp"
-                android:paddingHorizontal="20dp"/>
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="@drawable/boton_redondo_negro"
-            android:textColorHint="@color/colorPrimaryDark"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginLeft="25dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/documento_identidad_medico"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Documento de identidad"
-                android:textSize="20dp"
-                android:paddingHorizontal="20dp"/>
-
-        </android.support.design.widget.TextInputLayout>
-
         <Button
             android:id="@+id/ingresar"
             android:layout_width="match_parent"
@@ -140,7 +71,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginLeft="80dp"
             android:layout_marginRight="80dp"/>
-    </LinearLayout>
 
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
