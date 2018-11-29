@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "983342654307",
+    "firebase_url": "https://guambitos-7f429.firebaseio.com",
+    "project_id": "guambitos-7f429",
+    "storage_bucket": "guambitos-7f429.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:983342654307:android:cb87a22fea996f44",
+        "android_client_info": {
+          "package_name": "com.gammadelta.gambitos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "983342654307-kot4lctlspcbd4lj0mrj8n1iee4dim4o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gammadelta.gambitos",
+            "certificate_hash": "ed44520ec77da61825f1071d5287c6c04b79f7e8"
+          }
+        },
+        {
+          "client_id": "983342654307-ls2191c0iprod707aluu11mufc2hi9dk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBc3aR6shF0zekba1HMW5vFYL6w-z51rK8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "983342654307-ls2191c0iprod707aluu11mufc2hi9dk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

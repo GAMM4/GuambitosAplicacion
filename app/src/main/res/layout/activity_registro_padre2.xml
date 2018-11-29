@@ -183,7 +183,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/boton_redondo_negro"
                         android:hint="Dia"
-                        android:padding="10dp"
+                        android:padding="12dp"
                         android:textColorHint="@color/editText2" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -199,7 +199,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/boton_redondo_negro"
                         android:hint="Mes"
-                        android:padding="10dp"
+                        android:padding="12dp"
                         android:textColorHint="@color/editText2" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -214,7 +214,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/boton_redondo_negro"
                         android:hint="Año"
-                        android:padding="10dp"
+                        android:padding="12dp"
                         android:textColorHint="@color/editText2" />
 
                 </android.support.design.widget.TextInputLayout>
