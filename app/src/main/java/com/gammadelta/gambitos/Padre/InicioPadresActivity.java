@@ -63,7 +63,6 @@ public class InicioPadresActivity extends AppCompatActivity{
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         String userID = firebaseAuth.getCurrentUser().getUid();
 
@@ -86,25 +85,6 @@ public class InicioPadresActivity extends AppCompatActivity{
             }
         });
 
-        databaseReference.child(USUARIO_NODE).child(PADRE_NODE).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                hijosNombres.clear();
-                if (dataSnapshot.exists()){
-                    for (DataSnapshot snapshot:dataSnapshot.getChildren()) {
-                        Padres padres = dataSnapshot.getValue(Padres.class);
-                        Log.w(TAG, "Nombre hijo: " + padres.getNombre());
-                        hijosNombres.add(padres.getNombre());
-                    }
-                }
-                arrayAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

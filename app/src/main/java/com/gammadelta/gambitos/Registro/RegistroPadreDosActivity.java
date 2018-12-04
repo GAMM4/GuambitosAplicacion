@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gammadelta.gambitos.Login.IngresarActivity;
 import com.gammadelta.gambitos.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,7 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 
-public class RegistroPadreDosActivity extends AppCompatActivity implements View.OnClickListener{
+public class RegistroPadreDosActivity extends AppCompatActivity{
 
     private static final String USUARIO_NODE = "Usuarios";
     private static final String PADRE_NODE = "Padres";
@@ -42,6 +43,7 @@ public class RegistroPadreDosActivity extends AppCompatActivity implements View.
     private ProgressDialog progressDialog;
 
     private FirebaseUser firebaseUser;
+    private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth firebaseAuth;
 
     private TextView pin;
@@ -70,7 +72,12 @@ public class RegistroPadreDosActivity extends AppCompatActivity implements View.
 
         fecha = (EditText) findViewById(R.id.fecha);
         obtener_imagen = (ImageButton) findViewById(R.id.obtener_fecha);
-        obtener_imagen.setOnClickListener(this);
+        obtener_imagen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                obtenerFecha();
+            }
+        });
 
         pin                 = (TextView) findViewById(R.id.pin);
         nombre_hijo         = (TextView) findViewById(R.id.nombre_hijo);
@@ -82,17 +89,54 @@ public class RegistroPadreDosActivity extends AppCompatActivity implements View.
         agregar_otro_hijo   = (Button) findViewById(R.id.boton_agregar_otrohijo);
 
 
-        //registra_hijo.setOnClickListener(this);
-        //agregar_otro_hijo.setOnClickListener(this);
+        registra_hijo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                registrarHijo();
+                Intent i = new Intent(RegistroPadreDosActivity.this, RegistroMedicoActivity.class);
+                startActivity(i);
+            }
+        });
+        agregar_otro_hijo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent a = new Intent(RegistroPadreDosActivity.this, RegistroPadreDosActivity.class);
+                startActivity(a);
+            }
+        });
 
-        //progressDialog = new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
 
-        /*firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-        databaseReference = FirebaseDatabase.getInstance().getReference();*/
+        firebaseAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser() != null){
+                    databaseReference = FirebaseDatabase.getInstance().getReference().child(USUARIO_NODE).child(PADRE_NODE);
+                    databaseReference.child(firebaseAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()){
+                                pin.setText(String.valueOf(dataSnapshot.child("PIN").getValue()));
+                            }
+                        }
 
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-        /*String userID = firebaseAuth.getCurrentUser().getUid();
+                        }
+                    });
+                } else {
+                    startActivity(new Intent(RegistroPadreDosActivity.this, IngresarActivity.class));
+                    finish();
+                }
+            }
+        };
+        /*FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        String userID = firebaseAuth.getCurrentUser().getUid();
 
         databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(userID).addValueEventListener(new ValueEventListener(){
             @Override
@@ -112,20 +156,14 @@ public class RegistroPadreDosActivity extends AppCompatActivity implements View.
 
     }
 
-    /*@Override
+    @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-        updateUI(currentUser);
+        firebaseAuth.addAuthStateListener(mAuthListener);
     }
 
-    private void updateUI(FirebaseUser currentUser) {
-    }*/
 
-    ;
-
-    /*private void registrarHijo(){
+    private void registrarHijo(){
         final String nombre = nombre_hijo.getText().toString().trim();
         final String documento = documento_hijo.getText().toString().trim();
         final String sexo = genero.getSelectedItem().toString();
@@ -142,13 +180,13 @@ public class RegistroPadreDosActivity extends AppCompatActivity implements View.
             progressDialog.show();
 
             String userID = firebaseAuth.getCurrentUser().getUid();
+            String doc = documento;
 
-            databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(userID).child(HIJO_NODE).child("Nombre").setValue(nombre);
-            databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(userID).child(HIJO_NODE).child("Documento de identidad").setValue(documento);
-            databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(userID).child(HIJO_NODE).child("Sexo").setValue(sexo);
-            databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(userID).child(HIJO_NODE).child("Estatura madre").setValue(es_madre);
-            databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(userID).child(HIJO_NODE).child("Estatura padre").setValue(es_padre);
-            databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(userID).child(HIJO_NODE).child("Fecha de nacimiento").setValue(fecha_naci);
+            databaseReference.child(userID).child(HIJO_NODE).child(doc).child("Nombre").setValue(nombre);
+            databaseReference.child(userID).child(HIJO_NODE).child(doc).child("Sexo").setValue(sexo);
+            databaseReference.child(userID).child(HIJO_NODE).child(doc).child("Estatura madre").setValue(es_madre);
+            databaseReference.child(userID).child(HIJO_NODE).child(doc).child("Estatura padre").setValue(es_padre);
+            databaseReference.child(userID).child(HIJO_NODE).child(doc).child("Fecha de nacimiento").setValue(fecha_naci);
 
             Toast.makeText(this,"Hijo registrado",Toast.LENGTH_LONG).show();
 
@@ -159,27 +197,6 @@ public class RegistroPadreDosActivity extends AppCompatActivity implements View.
         }
 
         progressDialog.dismiss();
-
-    }*/
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.obtener_fecha:
-                obtenerFecha();
-                break;
-            /*case R.id.boton_registro_hijo:
-                registrarHijo();
-                Intent i = new Intent(RegistroPadreDosActivity.this, RegistroMedicoActivity.class);
-                startActivity(i);
-                break;
-            case R.id.boton_agregar_otrohijo:
-                registrarHijo();
-                Intent a = new Intent(RegistroPadreDosActivity.this, RegistroPadreDosActivity.class);
-                startActivity(a);
-                finish();
-                break;*/
-        }
 
     }
 
