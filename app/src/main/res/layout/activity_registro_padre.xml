@@ -50,6 +50,7 @@
                         android:padding="10dp"
                         android:singleLine="true"
                         android:hint="Nombre del Padre"
+                        android:inputType="textCapWords"
                         android:textSize="@dimen/size_edittext"
                         android:paddingHorizontal="20dp"/>
             </android.support.design.widget.TextInputLayout>
@@ -67,7 +68,7 @@
 
 
                     <android.support.design.widget.TextInputEditText
-                        android:id="@+id/documento_identidad_padre"
+                        android:id="@+id/correo_padre"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -75,10 +76,10 @@
                         android:background="@null"
                         android:padding="10dp"
                         android:singleLine="true"
-                        android:inputType="number"
-                        android:hint="Documento de Identidad"
+                        android:inputType="textEmailAddress"
+                        android:hint="Correo electrónico"
                         android:textSize="@dimen/size_edittext"
-                        android:paddingHorizontal="20dp"/>
+                        android:paddingHorizontal="20dp" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -129,6 +130,7 @@
                     android:singleLine="true"
                     android:hint="Pregunta de seguridad"
                     android:textSize="@dimen/size_edittext"
+                    android:inputType="textCapSentences"
                     android:paddingHorizontal="20dp"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -154,6 +156,7 @@
                     android:padding="10dp"
                     android:singleLine="true"
                     android:hint="Tu Respuesta"
+                    android:inputType="textCapSentences"
                     android:textSize="@dimen/size_edittext"
                     android:paddingHorizontal="20dp"/>
             </android.support.design.widget.TextInputLayout>
@@ -163,17 +166,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:textColorHint="@color/colorPrimaryDark"
+                android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold"
                 android:layout_marginTop="20dp"
-                android:hint="PIN: 132435 "
+                android:text="PIN: 132435 "
                 android:textSize="30sp"
                 android:paddingHorizontal="20dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Dale este PIN a tu doctor en el momento de la cita para que obtenga tus datos"
+                android:text="Dale este PIN a tu medico en el momento de la cita para que obtenga tus datos"
                 android:textSize="18sp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
@@ -181,7 +184,7 @@
                 android:layout_marginTop="5dp"/>
 
             <Button
-                android:id="@+id/boton_siguiente"
+                android:id="@+id/boton_siguiente1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Siguiente"
@@ -194,8 +197,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:layout_marginBottom="30dp"
-                android:onClick="irRegistroPadre2"/>
+                android:layout_marginBottom="0dp" />
+
         </LinearLayout>
 
     </ScrollView>

@@ -47,7 +47,8 @@
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
                                 android:background="@null"
-                                android:hint="Nombre de usuario"
+                                android:hint="Correo"
+                                android:inputType="textEmailAddress"
                                 android:textSize="18sp"
                                 android:gravity="center_vertical"
                                 android:padding="10dp"
@@ -107,7 +108,7 @@
                     </LinearLayout>
 
                     <Button
-                        android:id="@+id/boton_redondo_blanco"
+                        android:id="@+id/boton_ingresar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/boton_redondo_blanco"
@@ -119,8 +120,7 @@
                         android:gravity="center_horizontal"
                         android:layout_marginTop="40dp"
                         android:layout_marginLeft="30dp"
-                        android:layout_marginRight="30dp"
-                        android:onClick="irInicioPadre"/>
+                        android:layout_marginRight="30dp" />
 
 
                     <Button

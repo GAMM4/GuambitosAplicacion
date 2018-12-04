@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.gammadelta.gambitos.R;
 
+
 public class RegistroPadre2Activity extends AppCompatActivity {
 
     @Override
