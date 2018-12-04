@@ -1,27 +1,22 @@
 package com.gammadelta.gambitos.Padre;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.gammadelta.gambitos.R;
 import com.gammadelta.gambitos.Registro.RegistroMedicoActivity;
-import com.gammadelta.gambitos.Registro.RegistroPadre2Activity;
 import com.gammadelta.gambitos.Registro.RegistroPadreActivity;
+import com.gammadelta.gambitos.Registro.RegistroPadreDosActivity;
 import com.gammadelta.gambitos.model.Padres;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -68,6 +63,7 @@ public class InicioPadresActivity extends AppCompatActivity{
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         databaseReference = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         String userID = firebaseAuth.getCurrentUser().getUid();
 
@@ -85,7 +81,8 @@ public class InicioPadresActivity extends AppCompatActivity{
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                nombre_padre.setText("Padre");
+                pin.setText("000000");
             }
         });
 
@@ -115,7 +112,7 @@ public class InicioPadresActivity extends AppCompatActivity{
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                Intent i = new Intent(InicioPadresActivity.this, RegistroPadreActivity.class);
+                Intent i = new Intent(InicioPadresActivity.this, RegistroPadreDosActivity.class);
                 startActivity(i);
             }
         });

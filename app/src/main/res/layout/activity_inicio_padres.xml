@@ -55,7 +55,7 @@
             android:paddingTop="7dp"
             android:paddingBottom="7dp"
             android:singleLine="true"
-            android:text="Juan Pablo Ramirez"
+            android:text=""
             android:textColor="@android:color/white"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:background="@drawable/toolbar_pin"
-            android:text="132435"
+            android:text="000000"
             android:layout_below="@+id/barra"
             android:layout_alignRight="@+id/nombre_padre"
             android:textColor="@android:color/white"

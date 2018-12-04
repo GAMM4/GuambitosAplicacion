@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Login.IngresarActivity"
+        <activity
+            android:name=".Login.IngresarActivity"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,12 +19,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".Registro.RegistroActivity" />
-        <activity android:name=".Registro.RegistroPadreActivity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".Registro.RegistroPadre2Activity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".Registro.RegistroMedicoActivity"
-            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".Registro.RegistroPadreActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Registro.RegistroMedicoActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Padre.InicioPadresActivity"
             android:label="@string/title_activity_inicio_padres"
@@ -31,6 +32,8 @@
         <activity android:name=".Medico.InicioMedicoActivity" />
         <activity android:name=".Medico.InicioMedico2Activity" />
         <activity android:name=".Padre.HijoMenuActivity" />
+        <activity android:name=".Registro.RegistroPadreDosActivity"
+            android:windowSoftInputMode="stateHidden"/>
     </application>
 
 </manifest>

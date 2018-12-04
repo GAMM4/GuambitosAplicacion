@@ -112,7 +112,7 @@ public class RegistroPadreActivity extends AppCompatActivity implements View.OnC
                             databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(userID).child("Padre").setValue(true);
                             databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(userID).child("PIN").setValue(pin);
 
-                            Intent i = new Intent(RegistroPadreActivity.this, RegistroPadre2Activity.class);
+                            Intent i = new Intent(RegistroPadreActivity.this, RegistroPadreDosActivity.class);
                             startActivity(i);
 
                         } else {
