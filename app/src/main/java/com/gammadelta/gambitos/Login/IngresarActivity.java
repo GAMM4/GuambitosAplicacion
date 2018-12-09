@@ -49,7 +49,7 @@ public final class IngresarActivity extends AppCompatActivity {
 
         btnIngresar     = (Button) findViewById(R.id.boton_ingresar);
 
-        edtCorreo    = (EditText) findViewById(R.id.usuario_id);
+        edtCorreo       = (EditText) findViewById(R.id.usuario_id);
         edtContrasena   = (EditText) findViewById(R.id.contraseña_id);
 
 
@@ -100,8 +100,6 @@ public final class IngresarActivity extends AppCompatActivity {
         });
     }
 
-
-
     @Override
     public void onStart() {
         super.onStart();
@@ -116,6 +114,11 @@ public final class IngresarActivity extends AppCompatActivity {
 
     public final void irRegistro(View view) {
         Intent intent = new Intent((Context)this, RegistroActivity.class);
+        this.startActivity(intent);
+    }
+
+    public final void irIngresoMedico(View view) {
+        Intent intent = new Intent((Context)this, IngresoMedico.class);
         this.startActivity(intent);
     }
 }

@@ -137,9 +137,33 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginLeft="30dp"
                         android:layout_marginRight="30dp"
-                        android:layout_marginBottom="60dp"
+                        android:layout_marginBottom="30dp"
                         android:onClick="irRegistro"
                         />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="60dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="¿Eres médico?"
+                                android:textColor="@android:color/white"/>
+
+                            <TextView
+                                android:id="@+id/soy_medico"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="clic aqui"
+                                android:layout_marginLeft="4dp"
+                                android:textColor="@android:color/white"
+                                android:onClick="irIngresoMedico"/>
+
+                    </LinearLayout>
 
             </LinearLayout>
 

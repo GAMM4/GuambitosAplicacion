@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.gammadelta.gambitos.Medico.IngresoDatosActivity;
 import com.gammadelta.gambitos.R;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -12,7 +11,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.PointsGraphSeries;
 
 
-public class O_PvsE extends AppCompatActivity implements IngresoDatosActivity {
+public class O_PvsE extends AppCompatActivity {
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +22,7 @@ public class O_PvsE extends AppCompatActivity implements IngresoDatosActivity {
             GraphView points_OPvsE =(GraphView) findViewById(R.id.graph);
 
 
-            PointsGraphSeries<DataPoint> ingreso_medico=new PointsGraphSeries<>(a);
+            PointsGraphSeries<DataPoint> ingreso_medico=new PointsGraphSeries<>();
 
 
 

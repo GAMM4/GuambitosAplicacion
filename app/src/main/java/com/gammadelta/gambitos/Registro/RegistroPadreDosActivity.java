@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gammadelta.gambitos.Login.IngresarActivity;
+import com.gammadelta.gambitos.Padre.InicioPadresActivity;
 import com.gammadelta.gambitos.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -93,15 +94,12 @@ public class RegistroPadreDosActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 registrarHijo();
-                Intent i = new Intent(RegistroPadreDosActivity.this, RegistroMedicoActivity.class);
-                startActivity(i);
             }
         });
         agregar_otro_hijo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent a = new Intent(RegistroPadreDosActivity.this, RegistroPadreDosActivity.class);
-                startActivity(a);
+                registrarHijo();
             }
         });
 
@@ -189,6 +187,23 @@ public class RegistroPadreDosActivity extends AppCompatActivity{
             databaseReference.child(userID).child(HIJO_NODE).child(doc).child("Fecha de nacimiento").setValue(fecha_naci);
 
             Toast.makeText(this,"Hijo registrado",Toast.LENGTH_LONG).show();
+
+            registra_hijo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(RegistroPadreDosActivity.this, InicioPadresActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+            });
+            agregar_otro_hijo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent a = new Intent(RegistroPadreDosActivity.this, RegistroPadreDosActivity.class);
+                    startActivity(a);
+                    finish();
+                }
+            });
 
         }else{
 
