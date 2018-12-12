@@ -57,7 +57,8 @@
             android:text=""
             android:textColor="@android:color/white"
             android:textSize="22sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:elevation="10dp"/>
 
         <TextView
             android:id="@+id/pin"
@@ -75,6 +76,7 @@
             android:paddingLeft="15dp"
             android:paddingBottom="7dp"
             android:paddingTop="7dp"
+            android:elevation="12dp"
             />
 
     </RelativeLayout>
@@ -87,7 +89,8 @@
         android:layout_height="match_parent"
         android:layout_marginTop="100dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="70dp">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/myRecycler"
@@ -103,12 +106,12 @@
         android:layout_gravity="bottom|end"
         android:layout_marginRight="@dimen/fab_margin"
         android:layout_marginBottom="101dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
         android:src="@drawable/ic_action_add"/>
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_gravity="bottom|end">
 
         <LinearLayout

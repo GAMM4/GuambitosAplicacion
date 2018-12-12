@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +31,7 @@ public class IngresoMedicoIndependiente extends AppCompatActivity {
 
     private static final String USUARIO_NODE = "Usuarios";
     private static final String MEDICO_NODE = "Medicos";
-    private static final String TAG = "InicioPadresActicity" ;
+    private static final String TAG = "IngresoMedicoIndepen" ;
     private DatabaseReference databaseReference;
 
     private ProgressDialog progressDialog;
@@ -37,17 +39,19 @@ public class IngresoMedicoIndependiente extends AppCompatActivity {
     private FirebaseUser firebaseUser;
     private FirebaseAuth firebaseAuth;
 
-    private TextView documento_medico;
-    private TextView contrasena_medico;
+    private EditText documento_medico;
+    private EditText contrasena_medico;
     private Button ingresar_medico;
+
+    public static String documento_medic = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingreso_medico_independiente);
 
-        documento_medico = (TextView) findViewById(R.id.documento_identidad_medico);
-        contrasena_medico = (TextView) findViewById(R.id.contraseña_id_medico_independiente);
+        documento_medico = (EditText) findViewById(R.id.documento_medico_independiente);
+        contrasena_medico = (EditText) findViewById(R.id.contraseña_id_medico_independiente);
         ingresar_medico = (Button) findViewById(R.id.boton_ingresar_medico_independiente);
 
         progressDialog = new ProgressDialog(this);
@@ -62,54 +66,66 @@ public class IngresoMedicoIndependiente extends AppCompatActivity {
                 inicioMedico();
             }
         });
-
     }
 
     private void inicioMedico(){
-        String documento = documento_medico.getText().toString().trim();
-        final String contrasena_med =contrasena_medico.getText().toString().trim();
 
-        progressDialog.setMessage("Iniciando sesión...");
-        progressDialog.show();
+            progressDialog.setMessage("Iniciando sesión...");
+            progressDialog.show();
 
-        databaseReference.child(USUARIO_NODE).child(MEDICO_NODE).child(documento).addValueEventListener(new ValueEventListener() {
+            firebaseAuth.signInAnonymously()
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Log.d(TAG, "signInAnonymously:success");
+                                FirebaseUser user = firebaseAuth.getCurrentUser();
+                                updateUI(user);
+
+                                inicioSesion();
+
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "signInAnonymously:failure", task.getException());
+                                Toast.makeText(IngresoMedicoIndependiente.this, "Error de autenticación",
+                                        Toast.LENGTH_SHORT).show();
+                                updateUI(null);
+                            }
+                            progressDialog.dismiss();
+                        }
+                    });
+    }
+
+    private void inicioSesion(){
+        final String id_medico = documento_medico.getText().toString();
+        final String contrasena = contrasena_medico.getText().toString();
+
+        databaseReference.child(USUARIO_NODE).child(MEDICO_NODE).child(id_medico).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String contrasena = dataSnapshot.getValue(String.class);
+                String contra = "";
+                contra = dataSnapshot.child("Contraseña").getValue().toString();
                 if (dataSnapshot.exists()){
-                    if(contrasena.equals(contrasena_med)==true){
-                        firebaseAuth.signInAnonymously()
-                                .addOnCompleteListener(IngresoMedicoIndependiente.this, new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (task.isSuccessful()) {
-                                            Log.d(TAG, "signInAnonymously:success");
-                                            FirebaseUser user = firebaseAuth.getCurrentUser();
-                                            updateUI(user);
-                                            Intent b = new Intent(IngresoMedicoIndependiente.this, InicioMedicoActivity.class);
-                                            startActivity(b);
-                                        } else {
-                                            // If sign in fails, display a message to the user.
-                                            Log.w(TAG, "signInAnonymously:failure", task.getException());
-                                            Toast.makeText(IngresoMedicoIndependiente.this, "Error",
-                                                    Toast.LENGTH_SHORT).show();
-                                            updateUI(null);
-                                        }
-                                        progressDialog.dismiss();
-                                    }
-                                });
+
+                    if(contrasena.equals(contra)){
+                        //Toast.makeText(IngresoMedicoIndependiente.this, "Cuenta correcta", Toast.LENGTH_SHORT).show();
+                        documento_medic = id_medico;
+                        Intent b = new Intent(IngresoMedicoIndependiente.this, InicioMedicoActivity.class);
+                        startActivity(b);
+                        finish();
+                    } else{
+                        Toast.makeText(IngresoMedicoIndependiente.this, "Cuenta erronea", Toast.LENGTH_SHORT).show();
+                        contrasena_medico.getText().clear();
                     }
-                }
-                else {
-                    progressDialog.dismiss();
+                } else {
                     Toast.makeText(IngresoMedicoIndependiente.this, "Cuenta incorrecta", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(IngresoMedicoIndependiente.this, "Error", Toast.LENGTH_SHORT).show();
-                Intent b = new Intent(IngresoMedicoIndependiente.this, IngresoMedicoIndependiente.class);
-                startActivity(b);
+                //Intent b = new Intent(IngresoMedicoIndependiente.this, IngresoMedicoIndependiente.class);
+                //startActivity(b);
             }
         });
     }

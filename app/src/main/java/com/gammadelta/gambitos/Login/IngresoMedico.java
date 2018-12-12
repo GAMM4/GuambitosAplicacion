@@ -9,6 +9,9 @@ import android.view.View;
 import com.gammadelta.gambitos.R;
 
 public class IngresoMedico extends AppCompatActivity {
+    private static final String USUARIO_NODE = "Usuarios";
+    private static final String TAG = "ingresoMedico";
+    private static final String MEDICO_NODE = "Medicos";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

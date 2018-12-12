@@ -60,6 +60,9 @@ public class InicioPadresActivity extends AppCompatActivity{
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<Hijos> myDataset;
 
+    public ArrayList<String> keyHijo = new ArrayList<String>();
+    static String IDhijo = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +89,7 @@ public class InicioPadresActivity extends AppCompatActivity{
                 if (dataSnapshot.exists()){
                     nombre_padre.setText(String.valueOf(dataSnapshot.child("Nombre").getValue()));
                     pin.setText(String.valueOf(dataSnapshot.child("PIN").getValue()));
+                    //nombre_padre.setText(String.valueOf(dataSnapshot.child("Hijos").getKey()));
 
                     /*String nombre = "";
                     //nombre.toString().valueOf(dataSnapshot.child("Hijos").child("1049657235").child("Nombre").getValue());
@@ -110,21 +114,31 @@ public class InicioPadresActivity extends AppCompatActivity{
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     myDataset.removeAll(myDataset);
+                    int i=0;
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
                     String nombre = "";
                     String fecha_nacimiento = "";
                     String ultimaActualizacion = "null";
-                    nombre              = snapshot.child("Nombre").getValue().toString();
-                    fecha_nacimiento    = snapshot.child("Fecha de nacimiento").getValue().toString();
-                    //ultimaActualizacion = snapshot.child("Ultima actualizacion").getValue().toString();
-                    myDataset.add(new Hijos(nombre,fecha_nacimiento,ultimaActualizacion));
+                    if (snapshot.child("Fecha de nacimiento").exists()){
+                        nombre              = snapshot.child("Nombre").getValue().toString();
+                        fecha_nacimiento    = snapshot.child("Fecha de nacimiento").getValue().toString();
+                        //ultimaActualizacion = snapshot.child("Ultima actualizacion").getValue().toString();
+                        myDataset.add(new Hijos(nombre,fecha_nacimiento,ultimaActualizacion));
+                        keyHijo.add(i, snapshot.getKey());
+                        i++;
+                    }
+                    else {
+                        myDataset.add(new Hijos("Null","Null","Null"));
+                        i++;
+                    }
+
                 }
                 mAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                myDataset.add(new Hijos("null","null","null"));
             }
         });
 
@@ -132,8 +146,8 @@ public class InicioPadresActivity extends AppCompatActivity{
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                //      .setAction("Action", null).show();
                 Intent i = new Intent(InicioPadresActivity.this, RegistroPadreDosActivity.class);
                 startActivity(i);
             }
@@ -158,7 +172,10 @@ public class InicioPadresActivity extends AppCompatActivity{
         ((MyAdapter)mAdapter).setOnItemCliclListener(new MyAdapter.ListItemClickListener() {
             @Override
             public void onItemClick(int position, View v) {
-                Toast.makeText(mContext,"Position: ", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext,"ID: " + keyHijo.get(position), Toast.LENGTH_SHORT).show();
+                IDhijo = keyHijo.get(position);
+                Intent o = new Intent(InicioPadresActivity.this, HijoMenuActivity.class);
+                startActivity(o);
             }
         });
     }

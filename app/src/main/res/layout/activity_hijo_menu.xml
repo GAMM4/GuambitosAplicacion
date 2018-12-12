@@ -23,7 +23,8 @@
                 android:id="@+id/menu_atras"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_atras"/>
+                android:src="@drawable/ic_atras"
+                android:onClick="volverInicioPadres"/>
 
             <TextView
                 android:id="@+id/nombre_hijo"
@@ -31,7 +32,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:layout_marginLeft="30dp"
-                android:text="Nicolas Ramirez"
+                android:text=""
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"/>
@@ -43,7 +44,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_marginTop="64dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
@@ -64,7 +64,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
                     android:layout_weight="1"
-                    android:layout_margin="10dp">
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="20dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -94,7 +95,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
                     android:layout_weight="1"
-                    android:layout_margin="10dp">
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="20dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -132,7 +134,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
                     android:layout_weight="1"
-                    android:layout_margin="10dp">
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="20dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -164,7 +167,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
                     android:layout_weight="1"
-                    android:layout_margin="10dp">
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="20dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -196,7 +200,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:layout_weight="1"
-                android:layout_margin="10dp">
+                android:layout_margin="10dp"
+                app:cardCornerRadius="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"

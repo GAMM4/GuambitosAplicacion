@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.gammadelta.gambitos.Login.IngresarActivity;
 import com.gammadelta.gambitos.Padre.InicioPadresActivity;
 import com.gammadelta.gambitos.R;
+import com.gammadelta.gambitos.model.Hijos;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -65,6 +66,8 @@ public class RegistroPadreDosActivity extends AppCompatActivity{
     EditText fecha;
     ImageButton obtener_imagen;
 
+    int verificado = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,21 +92,23 @@ public class RegistroPadreDosActivity extends AppCompatActivity{
         registra_hijo       = (Button) findViewById(R.id.boton_registro_hijo);
         agregar_otro_hijo   = (Button) findViewById(R.id.boton_agregar_otrohijo);
 
+        progressDialog = new ProgressDialog(this);
 
         registra_hijo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 registrarHijo();
+                verificado = 1;
+
             }
         });
         agregar_otro_hijo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 registrarHijo();
+                verificado = 2;
             }
         });
-
-        progressDialog = new ProgressDialog(this);
 
         firebaseAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -169,50 +174,64 @@ public class RegistroPadreDosActivity extends AppCompatActivity{
         final String es_padre = estatura_padre.getText().toString().trim();
         final String fecha_naci = fecha.getText().toString();
 
+        progressDialog.setMessage("Creando hijo...");
+        progressDialog.show();
 
         //Verificar que los campos no esten vacios
         if (!TextUtils.isEmpty(nombre) && !TextUtils.isEmpty(documento) &&
                 !TextUtils.isEmpty(sexo) && !TextUtils.isEmpty(fecha_naci)){
 
-            progressDialog.setMessage("Creando hijo...");
-            progressDialog.show();
+            final String userID = firebaseAuth.getCurrentUser().getUid();
 
-            String userID = firebaseAuth.getCurrentUser().getUid();
-            String doc = documento;
 
-            databaseReference.child(userID).child(HIJO_NODE).child(doc).child("Nombre").setValue(nombre);
-            databaseReference.child(userID).child(HIJO_NODE).child(doc).child("Sexo").setValue(sexo);
-            databaseReference.child(userID).child(HIJO_NODE).child(doc).child("Estatura madre").setValue(es_madre);
-            databaseReference.child(userID).child(HIJO_NODE).child(doc).child("Estatura padre").setValue(es_padre);
-            databaseReference.child(userID).child(HIJO_NODE).child(doc).child("Fecha de nacimiento").setValue(fecha_naci);
 
-            Toast.makeText(this,"Hijo registrado",Toast.LENGTH_LONG).show();
-
-            registra_hijo.setOnClickListener(new View.OnClickListener() {
+            databaseReference.child(userID).child(HIJO_NODE).addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onClick(View v) {
-                    Intent i = new Intent(RegistroPadreDosActivity.this, InicioPadresActivity.class);
-                    startActivity(i);
-                    finish();
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    databaseReference.child(userID).child(HIJO_NODE).child(documento).child("Nombre").setValue(nombre);
+                    databaseReference.child(userID).child(HIJO_NODE).child(documento).child("Sexo").setValue(sexo);
+                    databaseReference.child(userID).child(HIJO_NODE).child(documento).child("Estatura madre").setValue(es_madre);
+                    databaseReference.child(userID).child(HIJO_NODE).child(documento).child("Estatura padre").setValue(es_padre);
+                    databaseReference.child(userID).child(HIJO_NODE).child(documento).child("Fecha de nacimiento").setValue(fecha_naci);
+
+                    if(verificado == 1){
+                        Intent i = new Intent(RegistroPadreDosActivity.this, InicioPadresActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
+
+                    if(verificado == 2){
+                        Intent a = new Intent(RegistroPadreDosActivity.this, RegistroPadreDosActivity.class);
+                        startActivity(a);
+                        finish();
+                    }
+
+                    if (dataSnapshot.child(documento).child("Nombre").exists()
+                            && dataSnapshot.child(documento).child("Sexo").exists()
+                            && dataSnapshot.child(documento).child("Estatura madre").exists()
+                            && dataSnapshot.child(documento).child("Estatura padre").exists()
+                            && dataSnapshot.child(documento).child("Fecha de nacimiento").exists()) {
+
+                        Toast.makeText(RegistroPadreDosActivity.this, "Hijo registrado", Toast.LENGTH_LONG);
+
+                    } else {
+                        Toast.makeText(RegistroPadreDosActivity.this, "Datos no registrados", Toast.LENGTH_LONG);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
                 }
             });
-            agregar_otro_hijo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent a = new Intent(RegistroPadreDosActivity.this, RegistroPadreDosActivity.class);
-                    startActivity(a);
-                    finish();
-                }
-            });
+            progressDialog.dismiss();
 
         }else{
 
             Toast.makeText(this,"Faltan completar campos",Toast.LENGTH_LONG).show();
 
         }
-
         progressDialog.dismiss();
-
     }
 
     private void obtenerFecha(){

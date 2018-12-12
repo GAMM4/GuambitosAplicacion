@@ -1,5 +1,6 @@
 package com.gammadelta.gambitos.Login;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gammadelta.gambitos.Graficas.GraficasMedicoActivity;
 import com.gammadelta.gambitos.Padre.InicioPadresActivity;
 import com.gammadelta.gambitos.R;
 import com.gammadelta.gambitos.Registro.RegistroActivity;
@@ -30,6 +32,8 @@ public final class IngresarActivity extends AppCompatActivity {
     private static final String TAG = "IngresarActivity";
     private TextView texto;
     private Typeface coolvetica;
+
+    private ProgressDialog progressDialog;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -52,7 +56,7 @@ public final class IngresarActivity extends AppCompatActivity {
         edtCorreo       = (EditText) findViewById(R.id.usuario_id);
         edtContrasena   = (EditText) findViewById(R.id.contraseña_id);
 
-
+        progressDialog = new ProgressDialog(this);
 
         inicialize();
 
@@ -78,17 +82,20 @@ public final class IngresarActivity extends AppCompatActivity {
                 } else {
                     Log.w(TAG, "onAuthStateChanged - signed_in");
                 }
+                progressDialog.dismiss();
             }
         };
 
     }
 
     private void ingresar(String correo, String contrasena){
+        progressDialog.setMessage("Iniciando sesión...");
+        progressDialog.show();
         firebaseAuth.signInWithEmailAndPassword(correo,contrasena).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(IngresarActivity.this, "Autenticación Exitosa", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(IngresarActivity.this, "Autenticación Exitosa", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(IngresarActivity.this, InicioPadresActivity.class);
                     startActivity(i);
                     finish();
@@ -96,6 +103,7 @@ public final class IngresarActivity extends AppCompatActivity {
                     Toast.makeText(IngresarActivity.this, "Error en Autenticación", Toast.LENGTH_SHORT).show();
                     edtContrasena.getText().clear();
                 }
+                progressDialog.dismiss();
             }
         });
     }
@@ -119,6 +127,11 @@ public final class IngresarActivity extends AppCompatActivity {
 
     public final void irIngresoMedico(View view) {
         Intent intent = new Intent((Context)this, IngresoMedico.class);
+        this.startActivity(intent);
+    }
+
+    public final void irGraficaMedico(View view) {
+        Intent intent = new Intent((Context)this, GraficasMedicoActivity.class);
         this.startActivity(intent);
     }
 }

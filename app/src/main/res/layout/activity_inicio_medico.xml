@@ -22,7 +22,6 @@
             android:layout_marginLeft="10dp">
 
             <TextView
-                android:id="@+id/texto_consulta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Consulta técnica del paciente"
@@ -38,7 +37,6 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@drawable/boton_redondo_negro"
-                android:textColorHint="@color/colorPrimaryDark"
                 android:layout_marginTop="60dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
@@ -53,7 +51,7 @@
                     android:background="@null"
                     android:padding="10dp"
                     android:singleLine="true"
-                    android:hint="Documento de identidad del padre"
+                    android:hint="Documento de identidad del niño"
                     android:textSize="@dimen/size_edittext"
                     android:paddingHorizontal="20dp"/>
 
@@ -64,7 +62,6 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@drawable/boton_redondo_negro"
-                android:textColorHint="@color/colorPrimaryDark"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"

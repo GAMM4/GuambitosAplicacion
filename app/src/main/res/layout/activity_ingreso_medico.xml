@@ -32,7 +32,7 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/boton_padre"
+                android:id="@+id/boton_medico_independiente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/boton_redondo_relleno"
@@ -49,7 +49,7 @@
                 android:onClick="irIngresoMedicoIndependiente"/>
 
             <Button
-                android:id="@+id/boton_medico"
+                android:id="@+id/boton_convenios"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/boton_redondo_relleno"

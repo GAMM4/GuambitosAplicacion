@@ -103,7 +103,8 @@
                                 android:layout_height="wrap_content"
                                 android:text="clic aqui"
                                 android:layout_marginLeft="4dp"
-                                android:textColor="@android:color/white"/>
+                                android:textColor="@android:color/white"
+                                android:onClick="irGraficaMedico"/>
 
                     </LinearLayout>
 

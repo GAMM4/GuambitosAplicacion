@@ -41,12 +41,12 @@
     </android.support.design.widget.AppBarLayout>
 
     <TextView
-        android:id="@+id/nombre_padre"
+        android:id="@+id/nombre_medico"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
         android:background="@drawable/toolbar_nombre"
-        android:text="Juan Pablo Ramirez"
+        android:text=""
         android:singleLine="true"
         android:textColor="@android:color/white"
         android:textStyle="bold"
@@ -84,14 +84,15 @@
                     android:id="@+id/nombre_hijo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nicolas Ramirez"
+                    android:text=""
                     android:textSize="22sp"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"/>
                 <TextView
+                    android:id="@+id/edad_hijo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="6 meses 2 semanas"
+                    android:text=""
                     android:textColor="@android:color/white"/>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -103,9 +104,10 @@
                         android:text="Última actualización"
                         android:textColor="@android:color/white"/>
                     <TextView
+                        android:id="@+id/fecha_ultimoRegistro"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="22/Oct/2018"
+                        android:text=""
                         android:layout_marginLeft="8dp"
                         android:textColor="@android:color/white"
                         />

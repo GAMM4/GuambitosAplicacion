@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Graficas.GraficasMedicoActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardCornerRadius="10dp"
+                card_view:cardBackgroundColor="@android:color/white"
+                card_view:cardUseCompatPadding="true"
+                card_view:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/nombre_cardview"
+                        android:text="Peso por edad"
+                        android:gravity="center"
+                        android:textColor="@drawable/texto_boton_redondo"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:padding="5dp"/>
+
+                    <com.jjoe64.graphview.GraphView
+                        android:layout_width="match_parent"
+                        android:layout_height="300dip"
+                        android:id="@+id/graph_O_PvsE"
+                        app:seriesData="0=5;2=5;3=0;4=2"
+                        app:seriesType="points"
+                        app:seriesColor="#00cc00"
+                        app:seriesTitle="Peso"
+                        android:title="Peso" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_margin="10dp"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/ultimo_P"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.7"
+                            android:text="Ultimo dato"
+                            android:layout_marginLeft="10dp"
+                            android:textColorHint="@color/editText2"
+                            android:textSize="16sp"/>
+                        <Button
+                            android:id="@+id/dato_P"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.3"
+                            android:text="Agregar nuevo dato"
+                            android:textStyle="bold"
+                            android:padding="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="@drawable/texto_boton_redondo"
+                            android:background="@drawable/boton_redondo_relleno"
+                            android:textSize="16sp"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardCornerRadius="10dp"
+                card_view:cardBackgroundColor="@android:color/white"
+                card_view:cardUseCompatPadding="true"
+                card_view:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/nombre_cardview"
+                        android:text="Longitud por edad"
+                        android:gravity="center"
+                        android:textColor="@drawable/texto_boton_redondo"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:padding="5dp"/>
+
+                    <com.jjoe64.graphview.GraphView
+                        android:layout_width="match_parent"
+                        android:layout_height="300dip"
+                        android:id="@+id/graph_O_LvsE"
+                        app:seriesData="0=5;2=5;3=0;4=2"
+                        app:seriesType="points"
+                        app:seriesColor="#00cc00"
+                        app:seriesTitle="Peso"
+                        android:title="Longitud" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_margin="10dp"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/ultimo_L"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.7"
+                            android:text="Ultimo dato"
+                            android:layout_marginLeft="10dp"
+                            android:textColorHint="@color/editText2"
+                            android:textSize="16sp"/>
+                        <Button
+                            android:id="@+id/dato_L"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.3"
+                            android:text="Agregar nuevo dato"
+                            android:textStyle="bold"
+                            android:padding="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="@drawable/texto_boton_redondo"
+                            android:background="@drawable/boton_redondo_relleno"
+                            android:textSize="16sp"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardCornerRadius="10dp"
+                card_view:cardBackgroundColor="@android:color/white"
+                card_view:cardUseCompatPadding="true"
+                card_view:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/nombre_cardview"
+                        android:text="Perímetro cefálico por edad"
+                        android:gravity="center"
+                        android:textColor="@drawable/texto_boton_redondo"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:padding="5dp"/>
+
+                    <com.jjoe64.graphview.GraphView
+                        android:layout_width="match_parent"
+                        android:layout_height="300dip"
+                        android:id="@+id/graph_O_CvsE"
+                        app:seriesData="0=5;2=5;3=0;4=2"
+                        app:seriesType="points"
+                        app:seriesColor="#00cc00"
+                        app:seriesTitle="Cabeza" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_margin="10dp"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/ultimo_C"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.7"
+                            android:text="Ultimo dato"
+                            android:layout_marginLeft="10dp"
+                            android:textColorHint="@color/editText2"
+                            android:textSize="16sp"/>
+                        <Button
+                            android:id="@+id/dato_C"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.3"
+                            android:text="Agregar nuevo dato"
+                            android:textStyle="bold"
+                            android:padding="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="@drawable/texto_boton_redondo"
+                            android:background="@drawable/boton_redondo_relleno"
+                            android:textSize="16sp"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardCornerRadius="10dp"
+                card_view:cardBackgroundColor="@android:color/white"
+                card_view:cardUseCompatPadding="true"
+                card_view:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/nombre_cardview"
+                        android:text="IMC por edad"
+                        android:gravity="center"
+                        android:textColor="@drawable/texto_boton_redondo"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:padding="5dp"/>
+
+                    <com.jjoe64.graphview.GraphView
+                        android:layout_width="match_parent"
+                        android:layout_height="300dip"
+                        android:id="@+id/graph_O_IMCvsE"
+                        app:seriesData="0=5;2=5;3=0;4=2"
+                        app:seriesType="points"
+                        app:seriesColor="#00cc00"
+                        app:seriesTitle="IMC" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_margin="10dp"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/ultimo_IMC"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.7"
+                            android:text="Ultimo dato"
+                            android:layout_marginLeft="10dp"
+                            android:textColorHint="@color/editText2"
+                            android:textSize="16sp"/>
+                        <Button
+                            android:id="@+id/dato_IMC"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.3"
+                            android:text="Agregar nuevo dato"
+                            android:textStyle="bold"
+                            android:padding="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="@drawable/texto_boton_redondo"
+                            android:background="@drawable/boton_redondo_relleno"
+                            android:textSize="16sp"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

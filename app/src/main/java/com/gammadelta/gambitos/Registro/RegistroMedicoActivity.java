@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gammadelta.gambitos.Login.IngresarActivity;
 import com.gammadelta.gambitos.Medico.InicioMedicoActivity;
 import com.gammadelta.gambitos.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,6 +22,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import static com.gammadelta.gambitos.Login.IngresoMedicoIndependiente.documento_medic;
 
 public class RegistroMedicoActivity extends AppCompatActivity {
 
@@ -42,6 +45,8 @@ public class RegistroMedicoActivity extends AppCompatActivity {
     private TextView contrasena;
     private Button btnRegistrar;
 
+    boolean Verificacion = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,17 +55,8 @@ public class RegistroMedicoActivity extends AppCompatActivity {
         nombre_medico       = (TextView) findViewById(R.id.nombre_medico);
         apellido_medico     = (TextView) findViewById(R.id.apellido_medico);
         documento_medico    = (TextView) findViewById(R.id.documento_identidad_medico);
-        contrasena          = (TextView) findViewById(R.id.contraseña_id_medico_independiente);
+        contrasena          = (TextView) findViewById(R.id.crear_contraseña);
         btnRegistrar        = (Button)   findViewById(R.id.registro_medico);
-
-        btnRegistrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                registrarMedico();
-                Intent i = new Intent(RegistroMedicoActivity.this, InicioMedicoActivity.class);
-                startActivity(i);
-            }
-        });
 
         progressDialog = new ProgressDialog(this);
 
@@ -68,6 +64,12 @@ public class RegistroMedicoActivity extends AppCompatActivity {
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
+        btnRegistrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                registrarMedico();
+            }
+        });
     }
 
     private void registrarMedico(){
@@ -80,44 +82,42 @@ public class RegistroMedicoActivity extends AppCompatActivity {
         if(!TextUtils.isEmpty(nombre) && !TextUtils.isEmpty(apellido) &&
                 !TextUtils.isEmpty(documento) && !TextUtils.isEmpty(contraseña)){
 
-            Toast.makeText(this,"Se deben completar todos los campos",Toast.LENGTH_LONG).show();
+            progressDialog.setMessage("Creando médico...");
+            progressDialog.show();
+
+            firebaseAuth.signInAnonymously()
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "signInAnonymously:success");
+                                FirebaseUser user = firebaseAuth.getCurrentUser();
+                                updateUI(user);
+                                databaseReference.child(USUARIO_NODE).child(MEDICO_NODE).child(documento).child("Nombre").setValue(nombre);
+                                databaseReference.child(USUARIO_NODE).child(MEDICO_NODE).child(documento).child("Apellido").setValue(apellido);
+                                databaseReference.child(USUARIO_NODE).child(MEDICO_NODE).child(documento).child("Documento identidad").setValue(documento);
+                                databaseReference.child(USUARIO_NODE).child(MEDICO_NODE).child(documento).child("Contraseña").setValue(contraseña);
+                                databaseReference.child(USUARIO_NODE).child(MEDICO_NODE).child(documento).child("Verificacion").setValue(0);
+                                documento_medic = documento;
+                                Intent i = new Intent(RegistroMedicoActivity.this, InicioMedicoActivity.class);
+                                startActivity(i);
+                                finish();
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "signInAnonymously:failure", task.getException());
+                                Toast.makeText(RegistroMedicoActivity.this, "Faltan completar datos",
+                                        Toast.LENGTH_SHORT).show();
+                                updateUI(null);
+                            }
+                            progressDialog.dismiss();
+                        }
+
+                    });
 
         } else {
             Toast.makeText(this,"Faltan completar campos",Toast.LENGTH_LONG).show();
         }
-
-
-        progressDialog.setMessage("Creando médico...");
-        progressDialog.show();
-
-        firebaseAuth.signInAnonymously()
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInAnonymously:success");
-                            FirebaseUser user = firebaseAuth.getCurrentUser();
-                            updateUI(user);
-                            databaseReference.child(USUARIO_NODE).child(MEDICO_NODE).child(documento).child("Nombre").setValue(nombre);
-                            databaseReference.child(USUARIO_NODE).child(MEDICO_NODE).child(documento).child("Apellido").setValue(apellido);
-                            databaseReference.child(USUARIO_NODE).child(MEDICO_NODE).child(documento).child("Documento identidad").setValue(documento);
-                            databaseReference.child(USUARIO_NODE).child(MEDICO_NODE).child(documento).child("Contraseña").setValue(contraseña);
-                            databaseReference.child(USUARIO_NODE).child(MEDICO_NODE).child(documento).child("Verificado").setValue(true);
-
-
-                            Intent i = new Intent(RegistroMedicoActivity.this, InicioMedicoActivity.class);
-                            startActivity(i);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInAnonymously:failure", task.getException());
-                            Toast.makeText(RegistroMedicoActivity.this, "Faltan completar datos",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-                        progressDialog.dismiss();
-                    }
-                });
     }
 
     @Override

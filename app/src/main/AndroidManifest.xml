@@ -29,18 +29,23 @@
             android:name=".Padre.InicioPadresActivity"
             android:label="@string/title_activity_inicio_padres"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Medico.InicioMedicoActivity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".Medico.InicioMedico2Activity"
-            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".Medico.InicioMedicoActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Medico.InicioMedico2Activity"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Padre.HijoMenuActivity" />
         <activity
             android:name=".Registro.RegistroPadreDosActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".Login.IngresoMedico"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".Login.IngresoMedicoIndependiente"
-            android:windowSoftInputMode="stateHidden"></activity>
+        <activity
+            android:name=".Login.IngresoMedico"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Login.IngresoMedicoIndependiente"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".Graficas.GraficasMedicoActivity"></activity>
     </application>
 
 </manifest>
