@@ -1,33 +1,75 @@
 package com.gammadelta.gambitos.Graficas;
 
+import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.gammadelta.gambitos.Medico.InicioMedico2Activity;
+import com.gammadelta.gambitos.Medico.InicioMedicoActivity;
 import com.gammadelta.gambitos.R;
+import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.PointsGraphSeries;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
+import static android.view.View.X;
+import static com.gammadelta.gambitos.Login.IngresoMedicoIndependiente.documento_medic;
+import static com.gammadelta.gambitos.Medico.InicioMedicoActivity.id_hijo_medico;
+import static com.gammadelta.gambitos.Medico.InicioMedicoActivity.id_padre_medico;
 
 public class GraficasMedicoActivity extends AppCompatActivity {
+    private static final String USUARIO_NODE = "Usuarios";
+    private static final String PADRE_NODE = "Padres";
+    private static final String MEDICO_NODE = "Medicos";
+    private static final String TAG = "InicioMedico2";
+    private static final String HIJO_NODE = "Hijos";
+    private DatabaseReference databaseReference;
 
-    public ArrayList<String> pesoEdad = new ArrayList<String>();
+    private FirebaseUser firebaseUser;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseAuth firebaseAuth;
+
+    private ProgressDialog progressDialog;
+
+    public ArrayList<String> pesoEdad;
 
     LineGraphSeries<DataPoint> pointPeso = new LineGraphSeries<>();
     LineGraphSeries<DataPoint> pointLongitud = new LineGraphSeries<>();
     LineGraphSeries<DataPoint> pointCabeza = new LineGraphSeries<>();
     LineGraphSeries<DataPoint> pointIMC = new LineGraphSeries<>();
+
+    private TextView nombreMedico;
+    private TextView nombreHijo;
+    private TextView edadHijo;
+    private TextView fechaActualizacion;
+    private Button   cerrarSesionMedico;
 
     private Button datoPeso;
     private Button datoLongitud;
@@ -38,10 +80,23 @@ public class GraficasMedicoActivity extends AppCompatActivity {
     private TextView ultimoCabeza;
     private TextView ultimoIMC;
 
+    private static final String CERO = "0";
+    private static final String BARRA = "/";
+    public final Calendar c = Calendar.getInstance();
+    final int dia = c.get(Calendar.DAY_OF_MONTH);
+    final int mes = c.get(Calendar.MONTH);
+    final int anio = c.get(Calendar.YEAR);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graficas_medico);
+
+        nombreMedico        = (TextView)    findViewById(R.id.nombre_medico);
+        nombreHijo          = (TextView)    findViewById(R.id.nombre_hijo);
+        edadHijo            = (TextView)    findViewById(R.id.edad_hijo);
+        fechaActualizacion  = (TextView)    findViewById(R.id.fecha_ultimoRegistro);
+        cerrarSesionMedico  = (Button)      findViewById(R.id.boton_cerrarsesion_medico);
 
         datoPeso        = (Button) findViewById(R.id.dato_P);
         datoLongitud    = (Button) findViewById(R.id.dato_L);
@@ -52,12 +107,23 @@ public class GraficasMedicoActivity extends AppCompatActivity {
         ultimoCabeza    = (TextView) findViewById(R.id.ultimo_C);
         ultimoIMC    = (TextView) findViewById(R.id.ultimo_IMC);
 
+        progressDialog = new ProgressDialog(this);
+
         grafica_O_PvsE();
         grafica_O_LvsE();
         grafica_O_LvsP();
         //grafica_O_LvsP2();
         grafica_O_IMCvsE();
         grafica_O_CvsE();
+
+        cerrarSesionMedico.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(GraficasMedicoActivity.this, InicioMedicoActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
 
         datoPeso.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,20 +132,88 @@ public class GraficasMedicoActivity extends AppCompatActivity {
             }
         });
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser() != null){
+                    databaseReference = FirebaseDatabase.getInstance().getReference();
+
+                    databaseReference.child(USUARIO_NODE).child(MEDICO_NODE).child(documento_medic).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()){
+                                String nombre_doc = "";
+                                String apellido_doc = "";
+                                nombre_doc = dataSnapshot.child("Nombre").getValue().toString();
+                                apellido_doc = dataSnapshot.child("Apellido").getValue().toString();
+                                nombreMedico.setText(nombre_doc + " " + apellido_doc);
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            nombreMedico.setText("No existe");
+                        }
+                    });
+
+                    databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()){
+                                nombreHijo.setText(String.valueOf(dataSnapshot.child("Nombre").getValue()));
+                                edadHijo.setText(String.valueOf(dataSnapshot.child("Fecha de nacimiento").getValue()));
+                                //fechaActualizacion.setText(String.valueOf(dataSnapshot.child("Ultima actualizacion").getValue()));
+                                fechaActualizacion.setText("null");
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            nombreHijo.setText("Null");
+                            edadHijo.setText("Null");
+                            fechaActualizacion.setText("Null");
+
+                        }
+                    });
+                } else {
+                    startActivity(new Intent(GraficasMedicoActivity.this, InicioMedicoActivity.class));
+                    finish();
+                }
+            }
+        };
+
     }
 
     public void showDialogPeso() {
+        progressDialog.setMessage("Creando dato...");
+        progressDialog.show();
+
         LayoutInflater layoutInflater = LayoutInflater.from(GraficasMedicoActivity.this);
         View promptView = layoutInflater.inflate(R.layout.input_dialogo, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(GraficasMedicoActivity.this);
         alertDialogBuilder.setView(promptView);
 
-        final EditText dato1 = (EditText) promptView.findViewById(R.id.dato1);
+        final TextView dato1 = (TextView) promptView.findViewById(R.id.dato1);
         dato1.setHint("Nuevo peso");
 
+        final TextView fecha = (TextView) promptView.findViewById(R.id.fecha);
+
+        fecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                obtenerFecha(fecha);
+            }
+        });
         alertDialogBuilder.setCancelable(false).setPositiveButton("Crear", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        pointPeso.appendData(new DataPoint(27,28),true,1000);
+                        final String fechaFinal = fecha.getText().toString().trim();
+                        String Peso = dato1.getText().toString().trim();
+
+                        ultimoPeso.setText(fechaFinal.toString());
+                        final double X = restarFechas("12/05/2017",fechaFinal);
+                        double Y = Double.parseDouble(Peso);
+                        pointPeso.appendData(new DataPoint(X,Y),true,1000);
+
+
                     }
                 }).setNegativeButton("Cancel",
                         new DialogInterface.OnClickListener() {
@@ -87,8 +221,74 @@ public class GraficasMedicoActivity extends AppCompatActivity {
                                 dialog.cancel();
                             }
                         });
+
+        /*databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String pesoN = dato1.getText().toString().trim();
+                if (dataSnapshot.child("PesoEdad").exists()){
+                    String datosFirebase = "";
+                    String newdatosFirebase = "";
+                    datosFirebase = dataSnapshot.child("PesoEdad").getValue().toString();
+                    newdatosFirebase = datosFirebase + "," + X + "," + pesoN;
+                    databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).child("PesoEdad").setValue(newdatosFirebase);
+                } else {
+                    String datosFirebase = "";
+                    datosFirebase = X + "," + pesoN;
+                    databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).child("PesoEdad").setValue(datosFirebase);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+
+        });*/
+
+        progressDialog.dismiss();
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
+    }
+
+    private void obtenerFecha(final TextView fecha){
+        DatePickerDialog recogerFecha = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                final int mesActual = month + 1;
+                String diaFormateado = (dayOfMonth < 10)? CERO + String.valueOf(dayOfMonth):String.valueOf(dayOfMonth);
+                String medFormateado = (mesActual < 10)? CERO + String.valueOf(mesActual):String.valueOf(mesActual);
+                fecha.setText(diaFormateado + BARRA + medFormateado + BARRA + year);
+            }
+        },anio,mes,dia);
+        recogerFecha.show();
+    }
+
+    public double restarFechas(String Inicio, String Final) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        Date fechaInicial= null;
+        try {
+            fechaInicial = dateFormat.parse(Inicio);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Date fechaFinal= null;
+        try {
+            fechaFinal = dateFormat.parse(Final);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        int dias=(int) ((fechaFinal.getTime()-fechaInicial.getTime())/86400000);
+        double resultado = (double) dias/30;
+        return resultado;
+        //String meses = Double.toString(mes);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        firebaseAuth.addAuthStateListener(mAuthListener);
     }
 
     public void grafica_O_PvsE(){
@@ -230,7 +430,7 @@ public class GraficasMedicoActivity extends AppCompatActivity {
         graph_O_PvsE.addSeries(Unosd);
         Unosd.setColor(Color.YELLOW);
 
-        LineGraphSeries<DataPoint> Dossd= new LineGraphSeries<>(new DataPoint[]{
+        final LineGraphSeries<DataPoint> Dossd= new LineGraphSeries<>(new DataPoint[]{
                 new DataPoint(0,4.4), new DataPoint(1,5.8), new DataPoint(2,7.1),
                 new DataPoint(3,8), new DataPoint(4,8.7), new DataPoint(5,9.3),
                 new DataPoint(6,9.8), new DataPoint(7,10.3), new DataPoint(8,10.7),
@@ -284,13 +484,35 @@ public class GraficasMedicoActivity extends AppCompatActivity {
 
         //------------------------------
 
-        pointPeso.appendData(new DataPoint(10,9),true,1000);
-        pointPeso.appendData(new DataPoint(15,15),true,1000);
-        pointPeso.appendData(new DataPoint(20,20),true,1000);
+
+
+                    /*databaseReference = FirebaseDatabase.getInstance().getReference();
+                    databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.child("PesoEdad").exists()){
+                                String datosGraficas = "";
+                                datosGraficas = dataSnapshot.child("PesoEdad").getValue().toString();
+
+                                pesoEdad = Lists.newArrayList(Splitter.on(',').trimResults().omitEmptyStrings().splitToList(datosGraficas));
+
+                                for(int i=0 ; i < pesoEdad.size() ; i = i+2){
+                                    double X = Double.parseDouble(pesoEdad.get(i));
+                                    double Y = Double.parseDouble(pesoEdad.get(i++));
+                                    pointPeso.appendData(new DataPoint(X,Y),true,1000);
+                                }
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
+                    });*/
+
         graph_O_PvsE.addSeries(pointPeso);
         pointPeso.setDrawDataPoints(true);
         pointPeso.setDataPointsRadius(10);
         pointPeso.setColor(Color.BLACK);
+
         //------------------------------
 
         graph_O_PvsE.getViewport().setYAxisBoundsManual(true);
@@ -300,17 +522,6 @@ public class GraficasMedicoActivity extends AppCompatActivity {
         graph_O_PvsE.getViewport().setXAxisBoundsManual(true);
         graph_O_PvsE.getViewport().setMinX(0);
         graph_O_PvsE.getViewport().setMaxX(61);
-
-        pointPeso.appendData(new DataPoint(25,25),true,1000);
-
-
-        graph_O_PvsE.getViewport().setScalable(true);
-        graph_O_PvsE.getViewport().setScalableY(true);
-
-
-
-        graph_O_PvsE.getViewport().setScrollable(true);
-        graph_O_PvsE.getViewport().setScrollableY(true);
     }
     public void grafica_O_LvsE(){
 

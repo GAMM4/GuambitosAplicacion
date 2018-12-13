@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.gammadelta.gambitos.Graficas.GraficasMedicoActivity;
 import com.gammadelta.gambitos.Login.IngresoMedicoIndependiente;
 import com.gammadelta.gambitos.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -90,14 +91,14 @@ public class InicioMedicoActivity extends AppCompatActivity {
                             pin_base = snapshot.child("PIN").getValue().toString();
                             if (pin.equals(pin_base)) {
                                 //Toast.makeText(InicioMedicoActivity.this, "PIN Correcto " + id_padre_medico, Toast.LENGTH_SHORT).show();
-                                Intent a = new Intent(InicioMedicoActivity.this, InicioMedico2Activity.class);
+                                Intent a = new Intent(InicioMedicoActivity.this, GraficasMedicoActivity.class);
                                 startActivity(a);
                                 finish();
                             } else {
                                 Toast.makeText(InicioMedicoActivity.this, "PIN Incorrecto", Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(InicioMedicoActivity.this, "No existe usuario", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(InicioMedicoActivity.this, "No existe usuario", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
