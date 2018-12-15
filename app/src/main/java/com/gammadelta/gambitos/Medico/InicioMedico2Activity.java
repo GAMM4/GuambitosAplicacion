@@ -15,6 +15,7 @@ import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gammadelta.gambitos.Graficas.GraficasMedicoNinaActivity;
 import com.gammadelta.gambitos.Graficas.GraficasMedicoNinoActivity;
 import com.gammadelta.gambitos.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -103,16 +104,26 @@ public class InicioMedico2Activity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         String pin_base = "";
+                        String genero = "";
                         id_padre_medico = snapshot.getKey().toString();
 
                         if (snapshot.child("Hijos").child(id).exists()) {
+                            genero = snapshot.child(HIJO_NODE).child(id).child("Sexo").getValue().toString();
                             pin_base = snapshot.child("PIN").getValue().toString();
                             if (pin.equals(pin_base)) {
                                 //Toast.makeText(InicioMedicoActivity.this, "PIN Correcto " + id_padre_medico, Toast.LENGTH_SHORT).show();
 
-                                Intent a = new Intent(InicioMedico2Activity.this, GraficasMedicoNinoActivity.class);
-                                startActivity(a);
-                                finish();
+                                if (genero.equals("Niño")){
+                                    Intent a = new Intent(InicioMedico2Activity.this, GraficasMedicoNinoActivity.class);
+                                    startActivity(a);
+                                    finish();
+                                } else if(genero.equals("Niña")){
+                                    Intent a = new Intent(InicioMedico2Activity.this, GraficasMedicoNinaActivity.class);
+                                    startActivity(a);
+                                    finish();
+                                }
+
+
                             } else {
                                 Toast.makeText(InicioMedico2Activity.this, "PIN Incorrecto", Toast.LENGTH_SHORT).show();
                             }
