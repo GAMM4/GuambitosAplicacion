@@ -42,14 +42,14 @@ import java.util.Calendar;
 import java.util.Date;
 
 import static com.gammadelta.gambitos.Login.IngresoMedicoIndependiente.documento_medic;
-import static com.gammadelta.gambitos.Medico.InicioMedicoActivity.id_hijo_medico;
-import static com.gammadelta.gambitos.Medico.InicioMedicoActivity.id_padre_medico;
+import static com.gammadelta.gambitos.Medico.InicioMedico2Activity.id_hijo_medico;
+import static com.gammadelta.gambitos.Medico.InicioMedico2Activity.id_padre_medico;
 
 public class GraficasMedicoNinoActivity extends AppCompatActivity {
     private static final String USUARIO_NODE = "Usuarios";
     private static final String PADRE_NODE = "Padres";
     private static final String MEDICO_NODE = "Medicos";
-    private static final String TAG = "InicioMedico2";
+    private static final String TAG = "GraficasMesicoNino";
     private static final String HIJO_NODE = "Hijos";
     private DatabaseReference databaseReference;
 
