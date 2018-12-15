@@ -1,7 +1,6 @@
 package com.gammadelta.gambitos.Medico;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -12,8 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.gammadelta.gambitos.Graficas.GraficasMedicoActivity;
-import com.gammadelta.gambitos.Login.IngresoMedicoIndependiente;
+import com.gammadelta.gambitos.Graficas.GraficasMedicoNinoActivity;
 import com.gammadelta.gambitos.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,8 +20,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import static com.gammadelta.gambitos.Login.IngresoMedicoIndependiente.documento_medic;
 
 public class InicioMedicoActivity extends AppCompatActivity {
     private static final String USUARIO_NODE = "Usuarios";
@@ -85,13 +81,14 @@ public class InicioMedicoActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         String pin_base = "";
-                        id_padre_medico = snapshot.getKey();
+                        id_padre_medico = snapshot.getKey().toString();
 
                         if (snapshot.child("Hijos").child(id).exists()) {
                             pin_base = snapshot.child("PIN").getValue().toString();
                             if (pin.equals(pin_base)) {
                                 //Toast.makeText(InicioMedicoActivity.this, "PIN Correcto " + id_padre_medico, Toast.LENGTH_SHORT).show();
-                                Intent a = new Intent(InicioMedicoActivity.this, GraficasMedicoActivity.class);
+
+                                Intent a = new Intent(InicioMedicoActivity.this, GraficasMedicoNinoActivity.class);
                                 startActivity(a);
                                 finish();
                             } else {

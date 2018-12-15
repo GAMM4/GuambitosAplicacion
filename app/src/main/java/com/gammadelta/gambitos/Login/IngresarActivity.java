@@ -6,19 +6,15 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gammadelta.gambitos.Graficas.GraficasMedicoActivity;
+import com.gammadelta.gambitos.Graficas.GraficasMedicoNinoActivity;
 import com.gammadelta.gambitos.Padre.InicioPadresActivity;
 import com.gammadelta.gambitos.R;
 import com.gammadelta.gambitos.Registro.RegistroActivity;
@@ -131,7 +127,7 @@ public final class IngresarActivity extends AppCompatActivity {
     }
 
     public final void irGraficaMedico(View view) {
-        Intent intent = new Intent((Context)this, GraficasMedicoActivity.class);
+        Intent intent = new Intent((Context)this, GraficasMedicoNinoActivity.class);
         this.startActivity(intent);
     }
 }

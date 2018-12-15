@@ -45,7 +45,7 @@
         <activity
             android:name=".Login.IngresoMedicoIndependiente"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".Graficas.GraficasMedicoActivity"></activity>
+        <activity android:name=".Graficas.GraficasMedicoNinoActivity"></activity>
     </application>
 
 </manifest>

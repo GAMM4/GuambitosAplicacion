@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Graficas.GraficasMedicoActivity">
+    tools:context=".Graficas.GraficasMedicoNinoActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -153,7 +153,7 @@
 
                     <com.jjoe64.graphview.GraphView
                         android:layout_width="match_parent"
-                        android:layout_height="300dip"
+                        android:layout_height="300dp"
                         android:id="@+id/graph_O_PvsE"
                         app:seriesData="0=5;2=5;3=0;4=2"
                         app:seriesType="points"
@@ -163,7 +163,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="55dp"
                         android:orientation="horizontal"
                         android:layout_margin="10dp"
                         android:weightSum="1">
@@ -175,6 +175,7 @@
                             android:layout_weight="0.7"
                             android:text="Ultimo dato"
                             android:layout_marginLeft="10dp"
+                            android:layout_gravity="center_vertical"
                             android:textColorHint="@color/editText2"
                             android:textSize="16sp"/>
                         <Button
@@ -182,13 +183,68 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.3"
-                            android:text="Agregar nuevo dato"
+                            android:text="Agregar dato"
                             android:textStyle="bold"
                             android:padding="10dp"
                             android:layout_marginLeft="10dp"
+                            android:layout_gravity="center_vertical"
                             android:textColor="@drawable/texto_boton_redondo"
                             android:background="@drawable/boton_redondo_relleno"
                             android:textSize="16sp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/detallePesoOnClic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginBottom="10dp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="18sp"
+                            android:text="Detalles y historial"/>
+                        <ImageView
+                            android:id="@+id/botonPeso"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/flecha_ampliar"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/detallePeso"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:visibility="gone"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/historialPeso"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.6"
+                            android:text=""
+                            android:textColor="@color/editText2"/>
+
+                        <TextView
+                            android:id="@+id/historialPeso_Fecha"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.6"
+                            android:text=""
+                            android:textColor="@color/editText2"/>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -232,7 +288,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="55dp"
                         android:orientation="horizontal"
                         android:layout_margin="10dp"
                         android:weightSum="1">
@@ -244,6 +300,7 @@
                             android:layout_weight="0.7"
                             android:text="Ultimo dato"
                             android:layout_marginLeft="10dp"
+                            android:layout_gravity="center_vertical"
                             android:textColorHint="@color/editText2"
                             android:textSize="16sp"/>
                         <Button
@@ -251,13 +308,67 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.3"
-                            android:text="Agregar nuevo dato"
+                            android:text="Agregar dato"
                             android:textStyle="bold"
                             android:padding="10dp"
                             android:layout_marginLeft="10dp"
+                            android:layout_gravity="center_vertical"
                             android:textColor="@drawable/texto_boton_redondo"
                             android:background="@drawable/boton_redondo_relleno"
                             android:textSize="16sp"/>
+                    </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/detalleLongitudOnClic"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginBottom="10dp">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="18sp"
+                                android:text="Detalles y historial"/>
+                            <ImageView
+                                android:id="@+id/botonLongitud"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/transparent"
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/flecha_ampliar"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/detalleLongitud"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginBottom="10dp"
+                            android:visibility="gone"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/historialLongitud"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.6"
+                                android:text=""
+                                android:textColor="@color/editText2"/>
+
+                            <TextView
+                                android:id="@+id/historialLongitud_Fecha"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.6"
+                                android:text=""
+                                android:textColor="@color/editText2"/>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -300,7 +411,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="55dp"
                         android:orientation="horizontal"
                         android:layout_margin="10dp"
                         android:weightSum="1">
@@ -312,6 +423,7 @@
                             android:layout_weight="0.7"
                             android:text="Ultimo dato"
                             android:layout_marginLeft="10dp"
+                            android:layout_gravity="center_vertical"
                             android:textColorHint="@color/editText2"
                             android:textSize="16sp"/>
                         <Button
@@ -319,15 +431,69 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.3"
-                            android:text="Agregar nuevo dato"
+                            android:text="Agregar dato"
                             android:textStyle="bold"
                             android:padding="10dp"
                             android:layout_marginLeft="10dp"
+                            android:layout_gravity="center_vertical"
                             android:textColor="@drawable/texto_boton_redondo"
                             android:background="@drawable/boton_redondo_relleno"
                             android:textSize="16sp"/>
-
                     </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/detalleCabezaOnClic"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginBottom="10dp">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="18sp"
+                                android:text="Detalles y historial"/>
+                            <ImageView
+                                android:id="@+id/botonCabeza"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/transparent"
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/flecha_ampliar"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/detalleCabeza"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginBottom="10dp"
+                            android:visibility="gone"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/historialCabeza"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.6"
+                                android:text=""
+                                android:textColor="@color/editText2"/>
+
+                            <TextView
+                                android:id="@+id/historialCabeza_Fecha"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.6"
+                                android:text=""
+                                android:textColor="@color/editText2"/>
+
+                        </LinearLayout>
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
@@ -369,7 +535,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="55dp"
                         android:orientation="horizontal"
                         android:layout_margin="10dp"
                         android:weightSum="1">
@@ -381,6 +547,7 @@
                             android:layout_weight="0.7"
                             android:text="Ultimo dato"
                             android:layout_marginLeft="10dp"
+                            android:layout_gravity="center_vertical"
                             android:textColorHint="@color/editText2"
                             android:textSize="16sp"/>
                         <Button
@@ -388,15 +555,69 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.3"
-                            android:text="Agregar nuevo dato"
+                            android:text="Agregar dato"
                             android:textStyle="bold"
                             android:padding="10dp"
                             android:layout_marginLeft="10dp"
+                            android:layout_gravity="center_vertical"
                             android:textColor="@drawable/texto_boton_redondo"
                             android:background="@drawable/boton_redondo_relleno"
                             android:textSize="16sp"/>
-
                     </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/detalleIMCOnClic"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginBottom="10dp">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="18sp"
+                                android:text="Detalles y historial"/>
+                            <ImageView
+                                android:id="@+id/botonIMC"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/transparent"
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/flecha_ampliar"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/detalleIMC"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginBottom="10dp"
+                            android:visibility="gone"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/historialIMC"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.6"
+                                android:text=""
+                                android:textColor="@color/editText2"/>
+
+                            <TextView
+                                android:id="@+id/historialIMC_Fecha"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.6"
+                                android:text=""
+                                android:textColor="@color/editText2"/>
+
+                        </LinearLayout>
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
