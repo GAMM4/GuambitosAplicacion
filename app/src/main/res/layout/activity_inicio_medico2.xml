@@ -6,31 +6,66 @@
     android:layout_height="match_parent"
     tools:context=".Medico.InicioMedico2Activity">
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <ImageView
+                android:id="@+id/menu_atras"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_atras" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="30dp"
+                android:text="Curva de crecimiento"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"/>
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="56dp"
         android:layout_marginRight="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp">
 
             <TextView
+                android:id="@+id/graficas_padre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Consulta técnica del paciente"
-                android:textSize="25sp"
+                android:text="Graficas del padre"
+                android:textSize="35sp"
                 android:paddingRight="10dp"
+                android:paddingLeft="10dp"
                 android:textAlignment="center"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
-                android:layout_marginTop="50dp"/>
+                android:layout_marginTop="20dp"/>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -52,7 +87,7 @@
                     android:padding="10dp"
                     android:singleLine="true"
                     android:inputType="numberSigned"
-                    android:hint="Documento de identidad del niño"
+                    android:hint="Registro civil del niño"
                     android:textSize="@dimen/size_edittext"
                     android:paddingHorizontal="20dp"/>
 

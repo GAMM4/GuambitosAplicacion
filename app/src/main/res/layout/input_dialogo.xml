@@ -35,6 +35,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:inputType="date"
+        android:focusable="false"
         android:background="@drawable/boton_redondo_negro"
         android:hint="Fecha del dato"
         android:padding="10dp" />

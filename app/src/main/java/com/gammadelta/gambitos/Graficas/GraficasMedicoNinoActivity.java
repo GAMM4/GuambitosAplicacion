@@ -460,7 +460,7 @@ public class GraficasMedicoNinoActivity extends AppCompatActivity {
         alertDialogBuilder.setView(promptView);
 
         final TextView dato1 = (TextView) promptView.findViewById(R.id.dato1);
-        dato1.setHint("Nuevo peso");
+        dato1.setHint("Peso (kg)");
 
         final TextView fecha = (TextView) promptView.findViewById(R.id.fecha);
 
@@ -525,7 +525,7 @@ public class GraficasMedicoNinoActivity extends AppCompatActivity {
         alertDialogBuilder.setView(promptView);
 
         final TextView dato1 = (TextView) promptView.findViewById(R.id.dato1);
-        dato1.setHint("Nueva longitud");
+        dato1.setHint("Longitud (cm)");
 
         final TextView fecha = (TextView) promptView.findViewById(R.id.fecha);
 
@@ -592,7 +592,7 @@ public class GraficasMedicoNinoActivity extends AppCompatActivity {
         alertDialogBuilder.setView(promptView);
 
         final TextView dato1 = (TextView) promptView.findViewById(R.id.dato1);
-        dato1.setHint("Nuevo perímetro (cm)");
+        dato1.setHint("Perímetro (cm)");
 
         final TextView fecha = (TextView) promptView.findViewById(R.id.fecha);
 
@@ -657,10 +657,10 @@ public class GraficasMedicoNinoActivity extends AppCompatActivity {
         alertDialogBuilder.setView(prompView);
 
         final TextView dato1 = (TextView) prompView.findViewById(R.id.dato_1);
-        dato1.setHint("Nuevo peso (kg)");
+        dato1.setHint("Peso (kg)");
 
         final TextView dato2 = (TextView) prompView.findViewById(R.id.dato_2);
-        dato2.setHint("Nueva longitud (cm)");
+        dato2.setHint("Longitud (cm)");
 
         final TextView resultado = (TextView) prompView.findViewById(R.id.resultado_imc);
 

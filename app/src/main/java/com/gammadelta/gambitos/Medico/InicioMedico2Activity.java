@@ -2,6 +2,7 @@ package com.gammadelta.gambitos.Medico;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +28,9 @@ import com.google.firebase.database.ValueEventListener;
 import static com.gammadelta.gambitos.Login.IngresoMedicoIndependiente.documento_medic;
 
 public class InicioMedico2Activity extends AppCompatActivity {
+    private TextView texto;
+    private Typeface coolvetica;
+
     private static final String USUARIO_NODE = "Usuarios";
     private static final String PADRE_NODE = "Padres";
     private static final String TAG = "InicioMedicoActivity";
@@ -41,6 +46,7 @@ public class InicioMedico2Activity extends AppCompatActivity {
     private EditText id_hijo;
     private EditText pin_padre;
     private Button ingresar_paciente;
+    private ImageView boton_atras;
 
     public static String id_padre_medico = "";
     public static String id_hijo_medico = "";
@@ -50,9 +56,21 @@ public class InicioMedico2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio_medico2);
 
+        String fuente1  = "fuentes/coolvetica.ttf";
+        this.coolvetica = Typeface.createFromAsset(this.getAssets(), fuente1);
+        this.texto      = (TextView)this.findViewById(R.id.graficas_padre);
+
         id_hijo             = (EditText)    findViewById(R.id.documento_identidad_hijo_medico);
         pin_padre           = (EditText)    findViewById(R.id.pin_padre_medico);
         ingresar_paciente   = (Button)      findViewById(R.id.ingresar_paciente);
+        boton_atras         = (ImageView)   findViewById(R.id.menu_atras);
+
+        boton_atras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         progressDialog = new ProgressDialog(this);
 
