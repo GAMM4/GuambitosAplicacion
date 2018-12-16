@@ -61,7 +61,7 @@ public class InicioPadresActivity extends AppCompatActivity{
     private ArrayList<Hijos> myDataset;
 
     public ArrayList<String> keyHijo = new ArrayList<String>();
-    static String IDhijo = "";
+    public static String IDhijo = "";
 
 
     @Override

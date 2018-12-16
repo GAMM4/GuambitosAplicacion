@@ -5,9 +5,13 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.gammadelta.gambitos.Graficas.GraficasPadreNinaActivity;
+import com.gammadelta.gambitos.Graficas.GraficasPadreNinoActivity;
 import com.gammadelta.gambitos.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,6 +35,10 @@ public class HijoMenuActivity extends AppCompatActivity {
 
     private TextView nombre_hijo;
 
+    private CardView botonGraficaMedico;
+
+    private String genero = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +46,22 @@ public class HijoMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hijo_menu);
 
         nombre_hijo = (TextView) findViewById(R.id.nombre_hijo);
+
+        botonGraficaMedico = (CardView) findViewById(R.id.botonGraficaMedico);
+
+        botonGraficaMedico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(genero.equals("Niño")){
+                    Intent x = new Intent(HijoMenuActivity.this, GraficasPadreNinoActivity.class);
+                    startActivity(x);
+                } else if (genero.equals("Niña")){
+                    Intent x = new Intent(HijoMenuActivity.this, GraficasPadreNinaActivity.class);
+                    startActivity(x);
+                }
+
+            }
+        });
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -51,9 +75,9 @@ public class HijoMenuActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()){
                                 nombre_hijo.setText(String.valueOf(dataSnapshot.child("Nombre").getValue()));
+                                genero = dataSnapshot.child("Sexo").getValue().toString();
                             }
                         }
-
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
                             nombre_hijo.setText("No existe");
@@ -65,23 +89,6 @@ public class HijoMenuActivity extends AppCompatActivity {
                 }
             }
         };
-
-        //final String userID = firebaseAuth.getCurrentUser().getUid();
-
-        /*databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(userID).child(IDhijo).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
-                    nombre_hijo.setText(String.valueOf(dataSnapshot.child("Nombre").getValue()));
-                }
-                else {
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                nombre_hijo.setText("Null");
-            }
-        });*/
     }
 
     @Override

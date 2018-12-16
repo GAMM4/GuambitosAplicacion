@@ -47,7 +47,8 @@
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Graficas.GraficasMedicoNinoActivity" />
         <activity android:name=".Graficas.GraficasMedicoNinaActivity" />
-        <activity android:name=".Graficas.GraficaPadreNinaActivity"></activity>
+        <activity android:name=".Graficas.GraficasPadreNinaActivity" />
+        <activity android:name=".Graficas.GraficasPadreNinoActivity"></activity>
     </application>
 
 </manifest>
