@@ -48,7 +48,8 @@
         <activity android:name=".Graficas.GraficasMedicoNinoActivity" />
         <activity android:name=".Graficas.GraficasMedicoNinaActivity" />
         <activity android:name=".Graficas.GraficasPadreNinaActivity" />
-        <activity android:name=".Graficas.GraficasPadreNinoActivity"></activity>
+        <activity android:name=".Graficas.GraficasPadreNinoActivity" />
+        <activity android:name=".Padre.ProximamenteActivity"></activity>
     </application>
 
 </manifest>

@@ -244,6 +244,97 @@
 
                 </LinearLayout>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Datos de nacimiento  (Opcional)"
+                    android:layout_marginTop="20dp"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="30dp"
+                    android:textColor="@color/editText2"
+                    android:layout_marginRight="30dp"/>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@drawable/boton_redondo_negro"
+                    android:textColorHint="@color/editText2"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginLeft="25dp"
+                    app:hintEnabled="false">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/peso_nacimineto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@null"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:inputType="numberSigned"
+                        android:hint="Peso al nacer (kg)"
+                        android:textSize="18sp"
+                        android:paddingHorizontal="20dp"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@drawable/boton_redondo_negro"
+                    android:textColorHint="@color/editText2"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginLeft="25dp"
+                    app:hintEnabled="false">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/longitud_nacimineto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@null"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:inputType="numberSigned"
+                        android:hint="Longitud al nacer (cm)"
+                        android:textSize="18sp"
+                        android:paddingHorizontal="20dp"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@drawable/boton_redondo_negro"
+                    android:textColorHint="@color/editText2"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginLeft="25dp"
+                    app:hintEnabled="false">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/perimetro_nacimineto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@null"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:inputType="numberSigned"
+                        android:hint="Perimetro cefalico al nacer (cm)"
+                        android:textSize="18sp"
+                        android:paddingHorizontal="20dp"/>
+
+                </android.support.design.widget.TextInputLayout>
+
                 <Button
                     android:id="@+id/boton_registro_hijo"
                     android:layout_width="match_parent"

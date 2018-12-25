@@ -36,6 +36,10 @@ public class HijoMenuActivity extends AppCompatActivity {
     private TextView nombre_hijo;
 
     private CardView botonGraficaMedico;
+    private CardView botonGraficaPadre;
+    private CardView botonNotas;
+    private CardView botonVacunas;
+    private CardView botonCitas;
 
     private String genero = "";
 
@@ -48,6 +52,10 @@ public class HijoMenuActivity extends AppCompatActivity {
         nombre_hijo = (TextView) findViewById(R.id.nombre_hijo);
 
         botonGraficaMedico = (CardView) findViewById(R.id.botonGraficaMedico);
+        botonGraficaPadre  = (CardView) findViewById(R.id.botonGraficaPadre);
+        botonCitas         = (CardView) findViewById(R.id.botonCitas);
+        botonVacunas       = (CardView) findViewById(R.id.botonVacunas);
+        botonNotas         = (CardView) findViewById(R.id.botonNotas);
 
         botonGraficaMedico.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +68,38 @@ public class HijoMenuActivity extends AppCompatActivity {
                     startActivity(x);
                 }
 
+            }
+        });
+
+        botonGraficaPadre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent a = new Intent(HijoMenuActivity.this, ProximamenteActivity.class);
+                startActivity(a);
+            }
+        });
+
+        botonCitas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent x = new Intent(HijoMenuActivity.this, ProximamenteActivity.class);
+                startActivity(x);
+            }
+        });
+
+        botonVacunas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent x = new Intent(HijoMenuActivity.this, ProximamenteActivity.class);
+                startActivity(x);
+            }
+        });
+
+        botonNotas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent x = new Intent(HijoMenuActivity.this, ProximamenteActivity.class);
+                startActivity(x);
             }
         });
 

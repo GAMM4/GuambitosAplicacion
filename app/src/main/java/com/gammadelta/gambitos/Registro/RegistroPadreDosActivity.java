@@ -54,6 +54,9 @@ public class RegistroPadreDosActivity extends AppCompatActivity{
     private Spinner genero;
     private TextView estatura_madre;
     private TextView estatura_padre;
+    private TextView peso_nacimiento;
+    private TextView longitud_nacimiento;
+    private TextView perimetro_nacimiento;
     private Button registra_hijo;
     private Button agregar_otro_hijo;
 
@@ -91,6 +94,9 @@ public class RegistroPadreDosActivity extends AppCompatActivity{
         estatura_padre      = (TextView) findViewById(R.id.estatura_padre);
         registra_hijo       = (Button) findViewById(R.id.boton_registro_hijo);
         agregar_otro_hijo   = (Button) findViewById(R.id.boton_agregar_otrohijo);
+        peso_nacimiento     = (TextView) findViewById(R.id.peso_nacimineto);
+        longitud_nacimiento = (TextView) findViewById(R.id.longitud_nacimineto);
+        perimetro_nacimiento= (TextView) findViewById(R.id.perimetro_nacimineto);
 
         progressDialog = new ProgressDialog(this);
 
@@ -135,27 +141,6 @@ public class RegistroPadreDosActivity extends AppCompatActivity{
                 }
             }
         };
-        /*FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        String userID = firebaseAuth.getCurrentUser().getUid();
-
-        databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(userID).addValueEventListener(new ValueEventListener(){
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
-                    pin.setText(String.valueOf(dataSnapshot.child("PIN").getValue()));
-                }
-                else {
-                    pin.setText("000000");
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });*/
-
 
     }
 
@@ -173,6 +158,9 @@ public class RegistroPadreDosActivity extends AppCompatActivity{
         final String es_madre = estatura_madre.getText().toString().trim();
         final String es_padre = estatura_padre.getText().toString().trim();
         final String fecha_naci = fecha.getText().toString();
+        final String peso_naci = peso_nacimiento.getText().toString();
+        final String longitud_naci = longitud_nacimiento.getText().toString();
+        final String perimetro_naci = perimetro_nacimiento.getText().toString();
 
         progressDialog.setMessage("Creando hijo...");
         progressDialog.show();
@@ -193,6 +181,16 @@ public class RegistroPadreDosActivity extends AppCompatActivity{
                     databaseReference.child(userID).child(HIJO_NODE).child(documento).child("Estatura madre").setValue(es_madre);
                     databaseReference.child(userID).child(HIJO_NODE).child(documento).child("Estatura padre").setValue(es_padre);
                     databaseReference.child(userID).child(HIJO_NODE).child(documento).child("Fecha de nacimiento").setValue(fecha_naci);
+
+                    if (!TextUtils.isEmpty(peso_naci)){
+                        databaseReference.child(userID).child(HIJO_NODE).child(documento).child("Peso de nacimiento").setValue(peso_naci);
+                    }
+                    if (!TextUtils.isEmpty(longitud_naci)){
+                        databaseReference.child(userID).child(HIJO_NODE).child(documento).child("Longitud de nacimiento").setValue(longitud_naci);
+                    }
+                    if (!TextUtils.isEmpty(perimetro_naci)){
+                        databaseReference.child(userID).child(HIJO_NODE).child(documento).child("Perimetro de nacimiento").setValue(perimetro_naci);
+                    }
 
                     if(verificado == 1){
                         Intent i = new Intent(RegistroPadreDosActivity.this, InicioPadresActivity.class);
