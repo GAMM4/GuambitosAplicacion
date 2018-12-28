@@ -36,6 +36,7 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -74,6 +75,9 @@ public class GraficasPadreNinaActivity extends AppCompatActivity {
     private TextView nombreHijo;
     private TextView edadHijo;
     private TextView fechaActualizacion;
+    private TextView peso_nacimiento;
+    private TextView longitud_nacimiento;
+    private TextView perimetro_nacimiento;
 
     private TextView ultimoPeso;
     private TextView ultimoLongitud;
@@ -131,6 +135,9 @@ public class GraficasPadreNinaActivity extends AppCompatActivity {
         nombreHijo          = (TextView)    findViewById(R.id.nombre_hijo);
         edadHijo            = (TextView)    findViewById(R.id.edad_hijo);
         fechaActualizacion  = (TextView)    findViewById(R.id.fecha_ultimoRegistro);
+        peso_nacimiento     = (TextView)    findViewById(R.id.peso_nacimineto);
+        longitud_nacimiento = (TextView)    findViewById(R.id.longitud_nacimineto);
+        perimetro_nacimiento= (TextView)    findViewById(R.id.perimetro_nacimineto);
 
         ultimoPeso      = (TextView) findViewById(R.id.ultimo_P);
         ultimoLongitud  = (TextView) findViewById(R.id.ultimo_L);
@@ -249,10 +256,35 @@ public class GraficasPadreNinaActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()){
                                 nombreHijo.setText(String.valueOf(dataSnapshot.child("Nombre").getValue()));
-                                edadHijo.setText(String.valueOf(dataSnapshot.child("Fecha de nacimiento").getValue()));
                                 fecha_nacimiento = dataSnapshot.child("Fecha de nacimiento").getValue().toString();
-                                //fechaActualizacion.setText(String.valueOf("Es" + fecha_nacimiento));
-                                fechaActualizacion.setText("Niña");
+                                edadHijo.setText(edadActual(fecha_nacimiento));
+
+                                if (dataSnapshot.child("Fecha de actualizacion").exists()) {
+                                    fechaActualizacion.setText(String.valueOf(dataSnapshot.child("Fecha de actualizacion").getValue()));
+                                } else{
+                                    fechaActualizacion.setText("");
+                                }
+
+                                if (dataSnapshot.child("Peso de nacimiento").exists()) {
+                                    String peso = dataSnapshot.child("Peso de nacimiento").getValue().toString();
+                                    peso_nacimiento.setText(peso + " kg");
+                                } else {
+                                    peso_nacimiento.setText("");
+                                }
+
+                                if (dataSnapshot.child("Longitud de nacimiento").exists()) {
+                                    String longitud = dataSnapshot.child("Longitud de nacimiento").getValue().toString();
+                                    longitud_nacimiento.setText(longitud + " cm");
+                                } else {
+                                    longitud_nacimiento.setText("");
+                                }
+
+                                if (dataSnapshot.child("Perimetro de nacimiento").exists()) {
+                                    String perimetro = dataSnapshot.child("Perimetro de nacimiento").getValue().toString();
+                                    perimetro_nacimiento.setText(perimetro + " cm");
+                                } else {
+                                    perimetro_nacimiento.setText("");
+                                }
                             }
                             if (dataSnapshot.child("PesoEdad").exists() && (datosI_PesoEdad == false)) {
                                 String datosGraficas = "";
@@ -416,6 +448,110 @@ public class GraficasPadreNinaActivity extends AppCompatActivity {
             }
         },anio,mes,dia);
         recogerFecha.show();
+    }
+
+    public String edadActual(String fechaNac){
+        ArrayList<String> fechaNacimiento;
+        ArrayList<String> fechaActual;
+
+        Date hoy = new Date();
+        DateFormat fechaHoy = new SimpleDateFormat("dd/MM/yyyy");
+        String fecha = fechaHoy.format(hoy);
+
+        fechaNacimiento = Lists.newArrayList(Splitter.on('/').trimResults().omitEmptyStrings().splitToList(fechaNac));
+        fechaActual     = Lists.newArrayList(Splitter.on('/').trimResults().omitEmptyStrings().splitToList(fecha));
+
+        Integer anoNac = Integer.valueOf(fechaNacimiento.get(2));
+        Integer mesNac = Integer.valueOf(fechaNacimiento.get(1));
+        Integer diaNac = Integer.valueOf(fechaNacimiento.get(0));
+
+        Integer anoHoy = Integer.valueOf(fechaActual.get(2));
+        Integer mesHoy = Integer.valueOf(fechaActual.get(1));
+        Integer diaHoy = Integer.valueOf(fechaActual.get(0));
+
+        int ano;
+        int mes;
+        int dia;
+
+        if(mesHoy >= mesNac){
+            ano = anoHoy - anoNac;
+            mes = mesHoy - mesNac;
+        } else {
+            ano = anoHoy - anoNac - 1;
+            mes = mesHoy + (12 - mesNac);
+        }
+        if(diaHoy >= diaNac){
+            dia = diaHoy - diaNac;
+        } else{
+            mes = mes - 1;
+            dia = diaHoy + (30 - diaNac);
+        }
+
+        String edadActual = "";
+        if (ano > 1){
+            if(mes > 1 && dia > 1){
+                edadActual = ano + " años, " + mes + " meses y " + dia + " días";
+            } else if(mes > 1 && dia == 1){
+                edadActual = ano + " años, " + mes + " meses y " + dia + " día";
+            } else if(mes > 1 && dia == 0){
+                edadActual = ano + " años, " + mes + " meses";
+            } else if(mes == 1 && dia > 1){
+                edadActual = ano + " años, " + mes + " mes y " + dia + " días";
+            } else if(mes == 1 && dia == 1){
+                edadActual = ano + " años, " + mes + " mes y " + dia + " día";
+            } else if(mes == 1 && dia <= 0){
+                edadActual = ano + " años, " + mes + " mes";
+            } else if(mes <= 0 && dia > 1){
+                edadActual = ano + " años y " + dia + " días";
+            } else if(mes <= 0 && dia == 1){
+                edadActual = ano + " años y " + dia + " día";
+            } else if(mes <= 0 && dia <= 0) {
+                edadActual = ano + " años";
+            }
+        } else if (ano == 1){
+            if(mes > 1 && dia > 1){
+                edadActual = ano + " año, " + mes + " meses y " + dia + " días";
+            } else if(mes > 1 && dia == 1){
+                edadActual = ano + " año, " + mes + " meses y " + dia + " día";
+            } else if(mes > 1 && dia == 0){
+                edadActual = ano + " año, " + mes + " meses";
+            } else if(mes == 1 && dia > 1){
+                edadActual = ano + " año, " + mes + " mes y " + dia + " días";
+            } else if(mes == 1 && dia == 1){
+                edadActual = ano + " año, " + mes + " mes y " + dia + " día";
+            } else if(mes == 1 && dia <= 0){
+                edadActual = ano + " año, " + mes + " mes";
+            } else if(mes <= 0 && dia > 1){
+                edadActual = ano + " año y " + dia + " días";
+            } else if(mes <= 0 && dia == 1){
+                edadActual = ano + " año y " + dia + " día";
+            } else if(mes <= 0 && dia <= 0) {
+                edadActual = ano + " año";
+            }
+        } else {
+            if(mes > 1 && dia > 1){
+                edadActual = mes + " meses y " + dia + " días";
+            } else if(mes > 1 && dia == 1){
+                edadActual = mes + " meses y " + dia + " día";
+            } else if(mes > 1 && dia == 0){
+                edadActual = mes + " meses";
+            } else if(mes == 1 && dia > 1){
+                edadActual = mes + " mes y " + dia + " días";
+            } else if(mes == 1 && dia == 1){
+                edadActual = mes + " mes y " + dia + " día";
+            } else if(mes == 1 && dia <= 0){
+                edadActual = mes + " mes";
+            } else if(mes <= 0 && dia > 1){
+                edadActual = dia + " días";
+            } else if(mes <= 0 && dia == 1){
+                edadActual = dia + " día";
+            } else if(mes <= 0 && dia <= 0) {
+                edadActual = "Error";
+            }
+        }
+        edadActual = "Edad: " + edadActual;
+
+        return edadActual;
     }
 
     public double restarFechas(String Inicio, String Final) {

@@ -29,6 +29,8 @@ import com.gammadelta.gambitos.Registro.RegistroPadreActivity;
 import com.gammadelta.gambitos.Registro.RegistroPadreDosActivity;
 import com.gammadelta.gambitos.model.Hijos;
 import com.gammadelta.gambitos.model.Padres;
+import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -37,7 +39,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class InicioPadresActivity extends AppCompatActivity{
@@ -118,12 +123,21 @@ public class InicioPadresActivity extends AppCompatActivity{
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
                     String nombre = "";
                     String fecha_nacimiento = "";
+                    String edad_Actual = "";
                     String ultimaActualizacion = "null";
                     if (snapshot.child("Fecha de nacimiento").exists()){
                         nombre              = snapshot.child("Nombre").getValue().toString();
+
                         fecha_nacimiento    = snapshot.child("Fecha de nacimiento").getValue().toString();
-                        //ultimaActualizacion = snapshot.child("Ultima actualizacion").getValue().toString();
-                        myDataset.add(new Hijos(nombre,fecha_nacimiento,ultimaActualizacion));
+                        edad_Actual = edadActual(fecha_nacimiento);
+
+                        if(snapshot.child("Fecha de actualizacion").exists()){
+                            ultimaActualizacion = snapshot.child("Fecha de actualizacion").getValue().toString();
+                        } else {
+                            ultimaActualizacion = "---";
+                        }
+
+                        myDataset.add(new Hijos(nombre,edad_Actual,ultimaActualizacion));
                         keyHijo.add(i, snapshot.getKey());
                         i++;
                     }
@@ -180,55 +194,108 @@ public class InicioPadresActivity extends AppCompatActivity{
         });
     }
 
-    /*private void loadData() {
-        String userID = firebaseAuth.getCurrentUser().getUid();
+    public String edadActual(String fechaNac){
+        ArrayList<String> fechaNacimiento;
+        ArrayList<String> fechaActual;
 
-        databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(userID).child("Hijos").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
+        Date hoy = new Date();
+        DateFormat fechaHoy = new SimpleDateFormat("dd/MM/yyyy");
+        String fecha = fechaHoy.format(hoy);
 
-                    //myDataset.removeAll(myDataset);
-                    myDataset.add(new Hijos("Emma","23/29","12"));
-                    //for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                        //Hijos hijos = snapshot.getValue(Hijos.class);
-                        //myDataset.add(hijos);
+        fechaNacimiento = Lists.newArrayList(Splitter.on('/').trimResults().omitEmptyStrings().splitToList(fechaNac));
+        fechaActual     = Lists.newArrayList(Splitter.on('/').trimResults().omitEmptyStrings().splitToList(fecha));
 
-                    //}
-                    mAdapter.notifyDataSetChanged();
-                }
-                else {
-                }
+        Integer anoNac = Integer.valueOf(fechaNacimiento.get(2));
+        Integer mesNac = Integer.valueOf(fechaNacimiento.get(1));
+        Integer diaNac = Integer.valueOf(fechaNacimiento.get(0));
+
+        Integer anoHoy = Integer.valueOf(fechaActual.get(2));
+        Integer mesHoy = Integer.valueOf(fechaActual.get(1));
+        Integer diaHoy = Integer.valueOf(fechaActual.get(0));
+
+        int ano;
+        int mes;
+        int dia;
+
+        if(mesHoy >= mesNac){
+            ano = anoHoy - anoNac;
+            mes = mesHoy - mesNac;
+        } else {
+            ano = anoHoy - anoNac - 1;
+            mes = mesHoy + (12 - mesNac);
+        }
+        if(diaHoy >= diaNac){
+            dia = diaHoy - diaNac;
+        } else{
+            mes = mes - 1;
+            dia = diaHoy + (30 - diaNac);
+        }
+
+        String edadActual = "";
+        if (ano > 1){
+            if(mes > 1 && dia > 1){
+                edadActual = ano + " años, " + mes + " meses y " + dia + " días";
+            } else if(mes > 1 && dia == 1){
+                edadActual = ano + " años, " + mes + " meses y " + dia + " día";
+            } else if(mes > 1 && dia == 0){
+                edadActual = ano + " años, " + mes + " meses";
+            } else if(mes == 1 && dia > 1){
+                edadActual = ano + " años, " + mes + " mes y " + dia + " días";
+            } else if(mes == 1 && dia == 1){
+                edadActual = ano + " años, " + mes + " mes y " + dia + " día";
+            } else if(mes == 1 && dia <= 0){
+                edadActual = ano + " años, " + mes + " mes";
+            } else if(mes <= 0 && dia > 1){
+                edadActual = ano + " años y " + dia + " días";
+            } else if(mes <= 0 && dia == 1){
+                edadActual = ano + " años y " + dia + " día";
+            } else if(mes <= 0 && dia <= 0) {
+                edadActual = ano + " años";
             }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+        } else if (ano == 1){
+            if(mes > 1 && dia > 1){
+                edadActual = ano + " año, " + mes + " meses y " + dia + " días";
+            } else if(mes > 1 && dia == 1){
+                edadActual = ano + " año, " + mes + " meses y " + dia + " día";
+            } else if(mes > 1 && dia == 0){
+                edadActual = ano + " año, " + mes + " meses";
+            } else if(mes == 1 && dia > 1){
+                edadActual = ano + " año, " + mes + " mes y " + dia + " días";
+            } else if(mes == 1 && dia == 1){
+                edadActual = ano + " año, " + mes + " mes y " + dia + " día";
+            } else if(mes == 1 && dia <= 0){
+                edadActual = ano + " año, " + mes + " mes";
+            } else if(mes <= 0 && dia > 1){
+                edadActual = ano + " año y " + dia + " días";
+            } else if(mes <= 0 && dia == 1){
+                edadActual = ano + " año y " + dia + " día";
+            } else if(mes <= 0 && dia <= 0) {
+                edadActual = ano + " año";
             }
-        });
-
-        databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(userID).child("Hijos").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
-                    String nombre="", fecha_nacimiento="", actualizacion="";
-                    nombre.valueOf(dataSnapshot.child("Nombre").getValue());
-
-                    myDataset.add(new Hijos("Berlin","null","null"));
-                    for(DataSnapshot snapshot:dataSnapshot.child("Nombre").getChildren()){
-                        String nombre="", fecha_nacimiento="", actualizacion="";
-                        nombre.valueOf(snapshot.getValue());
-
-
-                        myDataset.add(new Hijos(nombre,"null","null"));
-                    }
-                    mAdapter.notifyDataSetChanged();
-                }
-                else {
-                }
+        } else {
+            if(mes > 1 && dia > 1){
+                edadActual = mes + " meses y " + dia + " días";
+            } else if(mes > 1 && dia == 1){
+                edadActual = mes + " meses y " + dia + " día";
+            } else if(mes > 1 && dia == 0){
+                edadActual = mes + " meses";
+            } else if(mes == 1 && dia > 1){
+                edadActual = mes + " mes y " + dia + " días";
+            } else if(mes == 1 && dia == 1){
+                edadActual = mes + " mes y " + dia + " día";
+            } else if(mes == 1 && dia <= 0){
+                edadActual = mes + " mes";
+            } else if(mes <= 0 && dia > 1){
+                edadActual = dia + " días";
+            } else if(mes <= 0 && dia == 1){
+                edadActual = dia + " día";
+            } else if(mes <= 0 && dia <= 0) {
+                edadActual = "Error";
             }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-    }*/
+        }
+        edadActual = "Edad: " + edadActual;
+
+        return edadActual;
+    }
 
 }

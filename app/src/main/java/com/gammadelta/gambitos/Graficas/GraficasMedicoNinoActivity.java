@@ -5,7 +5,9 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -35,8 +37,10 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -74,6 +78,9 @@ public class GraficasMedicoNinoActivity extends AppCompatActivity {
     private TextView edadHijo;
     private TextView fechaActualizacion;
     private Button   cerrarSesionMedico;
+    private TextView peso_nacimiento;
+    private TextView longitud_nacimiento;
+    private TextView perimetro_nacimiento;
 
     private Button datoPeso;
     private Button datoLongitud;
@@ -122,6 +129,7 @@ public class GraficasMedicoNinoActivity extends AppCompatActivity {
     String Firebase_CabezaEdad = "";
     String Firebase_IMCEdad = "";
 
+    String ultima_actualizacion = "01/01/2000";
     boolean cierre = false;
     public String fecha_nacimiento = "";
     private static final int DURATION = 250;
@@ -136,6 +144,9 @@ public class GraficasMedicoNinoActivity extends AppCompatActivity {
         edadHijo            = (TextView)    findViewById(R.id.edad_hijo);
         fechaActualizacion  = (TextView)    findViewById(R.id.fecha_ultimoRegistro);
         cerrarSesionMedico  = (Button)      findViewById(R.id.boton_cerrarsesion_medico);
+        peso_nacimiento     = (TextView)    findViewById(R.id.peso_nacimineto);
+        longitud_nacimiento = (TextView)    findViewById(R.id.longitud_nacimineto);
+        perimetro_nacimiento= (TextView)    findViewById(R.id.perimetro_nacimineto);
 
         datoPeso        = (Button) findViewById(R.id.dato_P);
         datoLongitud    = (Button) findViewById(R.id.dato_L);
@@ -305,9 +316,36 @@ public class GraficasMedicoNinoActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()){
                                 nombreHijo.setText(String.valueOf(dataSnapshot.child("Nombre").getValue()));
-                                edadHijo.setText(String.valueOf(dataSnapshot.child("Fecha de nacimiento").getValue()));
                                 fecha_nacimiento = dataSnapshot.child("Fecha de nacimiento").getValue().toString();
-                                //fechaActualizacion.setText(String.valueOf("Es" + fecha_nacimiento));
+                                edadHijo.setText(edadActual(fecha_nacimiento));
+
+                                if (dataSnapshot.child("Fecha de actualizacion").exists()) {
+                                    fechaActualizacion.setText(String.valueOf(dataSnapshot.child("Fecha de actualizacion").getValue()));
+                                    ultima_actualizacion = dataSnapshot.child("Fecha de actualizacion").getValue().toString();
+                                } else{
+                                    fechaActualizacion.setText("");
+                                }
+
+                                if (dataSnapshot.child("Peso de nacimiento").exists()) {
+                                    String peso = dataSnapshot.child("Peso de nacimiento").getValue().toString();
+                                    peso_nacimiento.setText(peso + " kg");
+                                } else {
+                                    peso_nacimiento.setText("");
+                                }
+
+                                if (dataSnapshot.child("Longitud de nacimiento").exists()) {
+                                    String longitud = dataSnapshot.child("Longitud de nacimiento").getValue().toString();
+                                    longitud_nacimiento.setText(longitud + " cm");
+                                } else {
+                                    longitud_nacimiento.setText("");
+                                }
+
+                                if (dataSnapshot.child("Perimetro de nacimiento").exists()) {
+                                    String perimetro = dataSnapshot.child("Perimetro de nacimiento").getValue().toString();
+                                    perimetro_nacimiento.setText(perimetro + " cm");
+                                } else {
+                                    perimetro_nacimiento.setText("");
+                                }
                             }
                             if (dataSnapshot.child("PesoEdad").exists() && (datosI_PesoEdad == false)) {
                                 String datosGraficas = "";
@@ -473,6 +511,7 @@ public class GraficasMedicoNinoActivity extends AppCompatActivity {
         alertDialogBuilder.setCancelable(false).setPositiveButton("Crear", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
+                        String fechaTotal = "";
                         final String fechaFinal = fecha.getText().toString().trim();
                         String Peso = dato1.getText().toString().trim();
 
@@ -482,6 +521,9 @@ public class GraficasMedicoNinoActivity extends AppCompatActivity {
                         String pesoN = dato1.getText().toString().trim();
                         Firebase_PesoEdad = Firebase_PesoEdad + "," + fechaFinal + "," + pesoN;
 
+                        fechaTotal = mayorFecha(fechaFinal,ultima_actualizacion);
+
+                        final String finalFechaTotal = fechaTotal;
                         databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -490,11 +532,13 @@ public class GraficasMedicoNinoActivity extends AppCompatActivity {
                                         String datosFirebase = "";
                                         datosFirebase = dataSnapshot.child("PesoEdad").getValue().toString();
                                         Firebase_PesoEdad = datosFirebase + Firebase_PesoEdad;
+                                        databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).child("Fecha de actualizacion").setValue(finalFechaTotal);
                                         databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).child("PesoEdad").setValue(Firebase_PesoEdad);
                                         cierre = true;
                                     } else {
                                         String datosFirebase = "";
                                         datosFirebase = Firebase_PesoEdad;
+                                        databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).child("Fecha de actualizacion").setValue(finalFechaTotal);
                                         databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).child("PesoEdad").setValue(datosFirebase);
                                         cierre = true;
                                     }
@@ -538,6 +582,7 @@ public class GraficasMedicoNinoActivity extends AppCompatActivity {
         alertDialogBuilder.setCancelable(false).setPositiveButton("Crear", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
+                String fechaTotal = "";
                 final String fechaFinal = fecha.getText().toString().trim();
                 String Longitud = dato1.getText().toString().trim();
 
@@ -549,6 +594,10 @@ public class GraficasMedicoNinoActivity extends AppCompatActivity {
                 String pesoN = dato1.getText().toString().trim();
                 Firebase_LongitudEdad = Firebase_LongitudEdad + "," + fechaFinal + "," + pesoN;
 
+                fechaTotal = mayorFecha(fechaFinal,ultima_actualizacion);
+
+                final String finalFechaTotal = fechaTotal;
+
                 databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -557,11 +606,13 @@ public class GraficasMedicoNinoActivity extends AppCompatActivity {
                                 String datosFirebase = "";
                                 datosFirebase = dataSnapshot.child("LongitudEdad").getValue().toString();
                                 Firebase_LongitudEdad = datosFirebase + Firebase_LongitudEdad;
+                                databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).child("Fecha de actualizacion").setValue(finalFechaTotal);
                                 databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).child("LongitudEdad").setValue(Firebase_LongitudEdad);
                                 cierre = true;
                             } else {
                                 String datosFirebase = "";
                                 datosFirebase = Firebase_LongitudEdad;
+                                databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).child("Fecha de actualizacion").setValue(finalFechaTotal);
                                 databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).child("LongitudEdad").setValue(datosFirebase);
                                 cierre = true;
                             }
@@ -605,6 +656,7 @@ public class GraficasMedicoNinoActivity extends AppCompatActivity {
         alertDialogBuilder.setCancelable(false).setPositiveButton("Crear", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
+                String fechaTotal = "";
                 final String fechaFinal = fecha.getText().toString().trim();
                 String Cabeza = dato1.getText().toString().trim();
 
@@ -614,6 +666,10 @@ public class GraficasMedicoNinoActivity extends AppCompatActivity {
                 String pesoN = dato1.getText().toString().trim();
                 Firebase_CabezaEdad = Firebase_CabezaEdad + "," + fechaFinal + "," + pesoN;
 
+                fechaTotal = mayorFecha(fechaFinal,ultima_actualizacion);
+
+                final String finalFechaTotal = fechaTotal;
+
                 databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -622,11 +678,13 @@ public class GraficasMedicoNinoActivity extends AppCompatActivity {
                                 String datosFirebase = "";
                                 datosFirebase = dataSnapshot.child("CabezaEdad").getValue().toString();
                                 Firebase_CabezaEdad = datosFirebase + Firebase_CabezaEdad;
+                                databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).child("Fecha de actualizacion").setValue(finalFechaTotal);
                                 databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).child("CabezaEdad").setValue(Firebase_CabezaEdad);
                                 cierre = true;
                             } else {
                                 String datosFirebase = "";
                                 datosFirebase = Firebase_CabezaEdad;
+                                databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).child("Fecha de actualizacion").setValue(finalFechaTotal);
                                 databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).child("CabezaEdad").setValue(datosFirebase);
                                 cierre = true;
                             }
@@ -676,6 +734,8 @@ public class GraficasMedicoNinoActivity extends AppCompatActivity {
         });
         alertDialogBuilder.setCancelable(false).setPositiveButton("Crear", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+
+                String fechaTotal = "";
                 double resultadoIMC;
                 String Peso = dato1.getText().toString().trim();
                 String Longitud = dato2.getText().toString().trim();
@@ -695,6 +755,10 @@ public class GraficasMedicoNinoActivity extends AppCompatActivity {
                 String IMCdato = String.valueOf(resultadoIMC);
                 Firebase_IMCEdad = Firebase_IMCEdad + "," + fechaFinal + "," + IMCdato;
 
+                fechaTotal = mayorFecha(fechaFinal,ultima_actualizacion);
+
+                final String finalFechaTotal = fechaTotal;
+
                 databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -703,11 +767,13 @@ public class GraficasMedicoNinoActivity extends AppCompatActivity {
                                 String datosFirebase = "";
                                 datosFirebase = dataSnapshot.child("IMCEdad").getValue().toString();
                                 Firebase_IMCEdad = datosFirebase + Firebase_IMCEdad;
+                                databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).child("Fecha de actualizacion").setValue(finalFechaTotal);
                                 databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).child("IMCEdad").setValue(Firebase_IMCEdad);
                                 cierre = true;
                             } else {
                                 String datosFirebase = "";
                                 datosFirebase = Firebase_IMCEdad;
+                                databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).child("Fecha de actualizacion").setValue(finalFechaTotal);
                                 databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(id_padre_medico).child(HIJO_NODE).child(id_hijo_medico).child("IMCEdad").setValue(datosFirebase);
                                 cierre = true;
                             }
@@ -771,6 +837,138 @@ public class GraficasMedicoNinoActivity extends AppCompatActivity {
         double resultado = (double) dias/30;
         return resultado;
         //String meses = Double.toString(mes);
+    }
+
+    public String edadActual(String fechaNac){
+        ArrayList<String> fechaNacimiento;
+        ArrayList<String> fechaActual;
+
+        Date hoy = new Date();
+        DateFormat fechaHoy = new SimpleDateFormat("dd/MM/yyyy");
+        String fecha = fechaHoy.format(hoy);
+
+        fechaNacimiento = Lists.newArrayList(Splitter.on('/').trimResults().omitEmptyStrings().splitToList(fechaNac));
+        fechaActual     = Lists.newArrayList(Splitter.on('/').trimResults().omitEmptyStrings().splitToList(fecha));
+
+        Integer anoNac = Integer.valueOf(fechaNacimiento.get(2));
+        Integer mesNac = Integer.valueOf(fechaNacimiento.get(1));
+        Integer diaNac = Integer.valueOf(fechaNacimiento.get(0));
+
+        Integer anoHoy = Integer.valueOf(fechaActual.get(2));
+        Integer mesHoy = Integer.valueOf(fechaActual.get(1));
+        Integer diaHoy = Integer.valueOf(fechaActual.get(0));
+
+        int ano;
+        int mes;
+        int dia;
+
+        if(mesHoy >= mesNac){
+            ano = anoHoy - anoNac;
+            mes = mesHoy - mesNac;
+        } else {
+            ano = anoHoy - anoNac - 1;
+            mes = mesHoy + (12 - mesNac);
+        }
+        if(diaHoy >= diaNac){
+            dia = diaHoy - diaNac;
+        } else{
+            mes = mes - 1;
+            dia = diaHoy + (30 - diaNac);
+        }
+
+        String edadActual = "";
+        if (ano > 1){
+            if(mes > 1 && dia > 1){
+                edadActual = ano + " años, " + mes + " meses y " + dia + " días";
+            } else if(mes > 1 && dia == 1){
+                edadActual = ano + " años, " + mes + " meses y " + dia + " día";
+            } else if(mes > 1 && dia == 0){
+                edadActual = ano + " años, " + mes + " meses";
+            } else if(mes == 1 && dia > 1){
+                edadActual = ano + " años, " + mes + " mes y " + dia + " días";
+            } else if(mes == 1 && dia == 1){
+                edadActual = ano + " años, " + mes + " mes y " + dia + " día";
+            } else if(mes == 1 && dia <= 0){
+                edadActual = ano + " años, " + mes + " mes";
+            } else if(mes <= 0 && dia > 1){
+                edadActual = ano + " años y " + dia + " días";
+            } else if(mes <= 0 && dia == 1){
+                edadActual = ano + " años y " + dia + " día";
+            } else if(mes <= 0 && dia <= 0) {
+                edadActual = ano + " años";
+            }
+        } else if (ano == 1){
+            if(mes > 1 && dia > 1){
+                edadActual = ano + " año, " + mes + " meses y " + dia + " días";
+            } else if(mes > 1 && dia == 1){
+                edadActual = ano + " año, " + mes + " meses y " + dia + " día";
+            } else if(mes > 1 && dia == 0){
+                edadActual = ano + " año, " + mes + " meses";
+            } else if(mes == 1 && dia > 1){
+                edadActual = ano + " año, " + mes + " mes y " + dia + " días";
+            } else if(mes == 1 && dia == 1){
+                edadActual = ano + " año, " + mes + " mes y " + dia + " día";
+            } else if(mes == 1 && dia <= 0){
+                edadActual = ano + " año, " + mes + " mes";
+            } else if(mes <= 0 && dia > 1){
+                edadActual = ano + " año y " + dia + " días";
+            } else if(mes <= 0 && dia == 1){
+                edadActual = ano + " año y " + dia + " día";
+            } else if(mes <= 0 && dia <= 0) {
+                edadActual = ano + " año";
+            }
+        } else {
+            if(mes > 1 && dia > 1){
+                edadActual = mes + " meses y " + dia + " días";
+            } else if(mes > 1 && dia == 1){
+                edadActual = mes + " meses y " + dia + " día";
+            } else if(mes > 1 && dia == 0){
+                edadActual = mes + " meses";
+            } else if(mes == 1 && dia > 1){
+                edadActual = mes + " mes y " + dia + " días";
+            } else if(mes == 1 && dia == 1){
+                edadActual = mes + " mes y " + dia + " día";
+            } else if(mes == 1 && dia <= 0){
+                edadActual = mes + " mes";
+            } else if(mes <= 0 && dia > 1){
+                edadActual = dia + " días";
+            } else if(mes <= 0 && dia == 1){
+                edadActual = dia + " día";
+            } else if(mes <= 0 && dia <= 0) {
+                edadActual = "Error";
+            }
+        }
+        edadActual = "Edad: " + edadActual;
+
+        return edadActual;
+    }
+
+    public String mayorFecha(String Inicio, String Final) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        Date fechaInicial= null;
+        try {
+            fechaInicial = dateFormat.parse(Inicio);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Date fechaFinal= null;
+        try {
+            fechaFinal = dateFormat.parse(Final);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        String total = "";
+
+        if(fechaInicial.getTime() >= fechaFinal.getTime()){
+            total = Inicio;
+        }
+        if(fechaInicial.getTime() <= fechaFinal.getTime()){
+            total = Final;
+        }
+
+        return total;
     }
 
     @Override

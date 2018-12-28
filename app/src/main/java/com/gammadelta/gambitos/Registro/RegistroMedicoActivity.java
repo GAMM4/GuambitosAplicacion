@@ -57,6 +57,8 @@ public class RegistroMedicoActivity extends AppCompatActivity {
         documento_medico    = (TextView) findViewById(R.id.documento_identidad_medico);
         contrasena          = (TextView) findViewById(R.id.crear_contraseña);
         btnRegistrar        = (Button)   findViewById(R.id.registro_medico);
+        pregunta_seguridad  = (TextView) findViewById(R.id.pregunta_seguridad);
+        respuesta_seguridad = (TextView) findViewById(R.id.respuesta_pregunta_seguridad);
 
         progressDialog = new ProgressDialog(this);
 
@@ -77,10 +79,13 @@ public class RegistroMedicoActivity extends AppCompatActivity {
         final String apellido = apellido_medico.getText().toString().trim();
         final String documento = documento_medico.getText().toString().trim();
         final String contraseña = contrasena.getText().toString().trim();
+        final String pregunta = pregunta_seguridad.getText().toString().trim();
+        final String respuesta = respuesta_seguridad.getText().toString().trim();
 
         //Verificar que los campos no esten vacios
         if(!TextUtils.isEmpty(nombre) && !TextUtils.isEmpty(apellido) &&
-                !TextUtils.isEmpty(documento) && !TextUtils.isEmpty(contraseña)){
+                !TextUtils.isEmpty(documento) && !TextUtils.isEmpty(contraseña)
+                && !TextUtils.isEmpty(pregunta) && !TextUtils.isEmpty(respuesta)){
 
             progressDialog.setMessage("Creando médico...");
             progressDialog.show();
@@ -99,6 +104,8 @@ public class RegistroMedicoActivity extends AppCompatActivity {
                                 databaseReference.child(USUARIO_NODE).child(MEDICO_NODE).child(documento).child("Documento identidad").setValue(documento);
                                 databaseReference.child(USUARIO_NODE).child(MEDICO_NODE).child(documento).child("Contraseña").setValue(contraseña);
                                 databaseReference.child(USUARIO_NODE).child(MEDICO_NODE).child(documento).child("Verificacion").setValue(0);
+                                databaseReference.child(USUARIO_NODE).child(MEDICO_NODE).child(documento).child("Pregunta").setValue(pregunta);
+                                databaseReference.child(USUARIO_NODE).child(MEDICO_NODE).child(documento).child("Respuesta").setValue(respuesta);
                                 documento_medic = documento;
                                 Intent i = new Intent(RegistroMedicoActivity.this, InicioMedicoActivity.class);
                                 startActivity(i);
