@@ -62,6 +62,7 @@ public class InicioMedicoActivity extends AppCompatActivity {
 
 
         firebaseAuth = FirebaseAuth.getInstance();
+
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {

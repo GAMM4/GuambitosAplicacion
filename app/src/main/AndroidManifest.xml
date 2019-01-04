@@ -49,7 +49,23 @@
         <activity android:name=".Graficas.GraficasMedicoNinaActivity" />
         <activity android:name=".Graficas.GraficasPadreNinaActivity" />
         <activity android:name=".Graficas.GraficasPadreNinoActivity" />
-        <activity android:name=".Padre.ProximamenteActivity"></activity>
+        <activity android:name=".Padre.ProximamenteActivity" />
+        <activity
+            android:name=".OlvidoContrasena.ContrasenaPadreUnoActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".OlvidoContrasena.ContrasenaPadreDosActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".OlvidoContrasena.ContrasenaPadreTresActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".OlvidoContrasena.ContrasenaMedicoUnoActivity" />
+        <activity android:name=".OlvidoContrasena.ContrasenaMedicoDosActivity" />
+        <activity android:name=".OlvidoContrasena.ContrasenaMedicoTresActivity" />
+        <activity
+            android:name=".Padre.PruebaActivity"
+            android:label="@string/title_activity_prueba"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

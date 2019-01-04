@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gammadelta.gambitos.Medico.InicioMedicoActivity;
+import com.gammadelta.gambitos.OlvidoContrasena.ContrasenaMedicoUnoActivity;
 import com.gammadelta.gambitos.R;
 import com.gammadelta.gambitos.Registro.RegistroMedicoActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -42,6 +43,7 @@ public class IngresoMedicoIndependiente extends AppCompatActivity {
     private EditText documento_medico;
     private EditText contrasena_medico;
     private Button ingresar_medico;
+    private TextView olvide_contrasena;
 
     public static String documento_medic = "";
 
@@ -50,9 +52,10 @@ public class IngresoMedicoIndependiente extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingreso_medico_independiente);
 
-        documento_medico = (EditText) findViewById(R.id.documento_medico_independiente);
-        contrasena_medico = (EditText) findViewById(R.id.contraseña_id_medico_independiente);
-        ingresar_medico = (Button) findViewById(R.id.boton_ingresar_medico_independiente);
+        documento_medico    = (EditText) findViewById(R.id.documento_medico_independiente);
+        contrasena_medico   = (EditText) findViewById(R.id.contraseña_id_medico_independiente);
+        ingresar_medico     = (Button) findViewById(R.id.boton_ingresar_medico_independiente);
+        olvide_contrasena   = (TextView) findViewById(R.id.olvido_clave_medico_independiente);
 
         progressDialog = new ProgressDialog(this);
 
@@ -64,6 +67,14 @@ public class IngresoMedicoIndependiente extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 inicioMedico();
+            }
+        });
+
+        olvide_contrasena.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent b = new Intent(IngresoMedicoIndependiente.this, ContrasenaMedicoUnoActivity.class);
+                startActivity(b);
             }
         });
     }
@@ -100,7 +111,7 @@ public class IngresoMedicoIndependiente extends AppCompatActivity {
         final String id_medico = documento_medico.getText().toString();
         final String contrasena = contrasena_medico.getText().toString();
 
-        databaseReference.child(USUARIO_NODE).child(MEDICO_NODE).child(id_medico).addValueEventListener(new ValueEventListener() {
+        databaseReference.child(USUARIO_NODE).child(MEDICO_NODE).child(id_medico).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String contra = "";

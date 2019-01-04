@@ -4,38 +4,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.constraint.solver.widgets.Snapshot;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.recyclerview.extensions.ListAdapter;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-
-import com.gammadelta.gambitos.Login.IngresarActivity;
 import com.gammadelta.gambitos.R;
-import com.gammadelta.gambitos.Registro.RegistroMedicoActivity;
-import com.gammadelta.gambitos.Registro.RegistroPadreActivity;
 import com.gammadelta.gambitos.Registro.RegistroPadreDosActivity;
 import com.gammadelta.gambitos.model.Hijos;
-import com.gammadelta.gambitos.model.Padres;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.firebase.auth.FirebaseAuth;
@@ -52,7 +38,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-public class InicioPadresActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class PruebaActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String USUARIO_NODE = "Usuarios";
     private static final String PADRE_NODE = "Padres";
@@ -75,7 +62,6 @@ public class InicioPadresActivity extends AppCompatActivity implements Navigatio
     public ArrayList<String> keyHijo = new ArrayList<String>();
     public static String IDhijo = "";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +75,7 @@ public class InicioPadresActivity extends AppCompatActivity implements Navigatio
             public void onClick(View view) {
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 //      .setAction("Action", null).show();
-                Intent i = new Intent(InicioPadresActivity.this, RegistroPadreDosActivity.class);
+                Intent i = new Intent(PruebaActivity.this, RegistroPadreDosActivity.class);
                 startActivity(i);
             }
         });
@@ -186,14 +172,14 @@ public class InicioPadresActivity extends AppCompatActivity implements Navigatio
         }
     }
 
-    /*@Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.prueba, menu);
         return true;
     }
 
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -225,9 +211,7 @@ public class InicioPadresActivity extends AppCompatActivity implements Navigatio
         //} else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
-            Intent o = new Intent(InicioPadresActivity.this, IngresarActivity.class);
-            startActivity(o);
-            signOut();
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -255,7 +239,7 @@ public class InicioPadresActivity extends AppCompatActivity implements Navigatio
             public void onItemClick(int position, View v) {
                 //Toast.makeText(mContext,"ID: " + keyHijo.get(position), Toast.LENGTH_SHORT).show();
                 IDhijo = keyHijo.get(position);
-                Intent o = new Intent(InicioPadresActivity.this, HijoMenuActivity.class);
+                Intent o = new Intent(PruebaActivity.this, HijoMenuActivity.class);
                 startActivity(o);
             }
         });
@@ -364,13 +348,4 @@ public class InicioPadresActivity extends AppCompatActivity implements Navigatio
 
         return edadActual;
     }
-
-    private void signOut(){
-        firebaseAuth.signOut();
-        updateUI(null);
-    }
-
-    private void updateUI(FirebaseUser currentUser) {
-    }
-
 }

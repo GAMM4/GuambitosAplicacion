@@ -24,6 +24,7 @@ import com.gammadelta.gambitos.Padre.InicioPadresActivity;
 import com.gammadelta.gambitos.R;
 import com.gammadelta.gambitos.model.ExpandAndCollapseViewUtil;
 import com.google.common.base.Splitter;
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,6 +37,7 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -74,6 +76,9 @@ public class GraficasPadreNinoActivity extends AppCompatActivity {
     private TextView nombreHijo;
     private TextView edadHijo;
     private TextView fechaActualizacion;
+    private TextView peso_nacimiento;
+    private TextView longitud_nacimiento;
+    private TextView perimetro_nacimiento;
 
     private TextView ultimoPeso;
     private TextView ultimoLongitud;
@@ -118,6 +123,7 @@ public class GraficasPadreNinoActivity extends AppCompatActivity {
     String Firebase_CabezaEdad = "";
     String Firebase_IMCEdad = "";
 
+    String ultimaFecha = "";
     boolean cierre = false;
     public String fecha_nacimiento = "";
     private static final int DURATION = 250;
@@ -131,6 +137,9 @@ public class GraficasPadreNinoActivity extends AppCompatActivity {
         nombreHijo          = (TextView)    findViewById(R.id.nombre_hijo);
         edadHijo            = (TextView)    findViewById(R.id.edad_hijo);
         fechaActualizacion  = (TextView)    findViewById(R.id.fecha_ultimoRegistro);
+        peso_nacimiento     = (TextView)    findViewById(R.id.peso_nacimineto);
+        longitud_nacimiento = (TextView)    findViewById(R.id.longitud_nacimineto);
+        perimetro_nacimiento= (TextView)    findViewById(R.id.perimetro_nacimineto);
 
         ultimoPeso      = (TextView) findViewById(R.id.ultimo_P);
         ultimoLongitud  = (TextView) findViewById(R.id.ultimo_L);
@@ -247,146 +256,170 @@ public class GraficasPadreNinoActivity extends AppCompatActivity {
                     databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(firebaseAuth.getCurrentUser().getUid()).child("Hijos").child(IDhijo).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.exists()){
+
+                            if (dataSnapshot.exists()) {
                                 nombreHijo.setText(String.valueOf(dataSnapshot.child("Nombre").getValue()));
-                                edadHijo.setText(String.valueOf(dataSnapshot.child("Fecha de nacimiento").getValue()));
                                 fecha_nacimiento = dataSnapshot.child("Fecha de nacimiento").getValue().toString();
-                                //fechaActualizacion.setText(String.valueOf("Es" + fecha_nacimiento));
-                                fechaActualizacion.setText("Niño");
-                            }
-                            if (dataSnapshot.child("PesoEdad").exists() && (datosI_PesoEdad == false)) {
-                                String datosGraficas = "";
-                                datosGraficas = dataSnapshot.child("PesoEdad").getValue().toString();
+                                edadHijo.setText(edadActual(fecha_nacimiento));
 
-                                pesoEdad = Lists.newArrayList(Splitter.on(',').trimResults().omitEmptyStrings().splitToList(datosGraficas));
-                                for (int i = 0; i < pesoEdad.size(); i = i + 2) {
-                                    int o = i + 1;
-
-                                    double X = restarFechas(fecha_nacimiento,pesoEdad.get(i));
-                                    //double X = Double.parseDouble(pesoEdad.get(i));
-                                    double Y = Double.parseDouble(pesoEdad.get(o));
-
-                                    pointPeso.appendData(new DataPoint(X, Y), true, 1000);
+                                if (dataSnapshot.child("Fecha de actualizacion").exists()) {
+                                    fechaActualizacion.setText(String.valueOf(dataSnapshot.child("Fecha de actualizacion").getValue()));
+                                } else{
+                                    fechaActualizacion.setText("");
                                 }
-                                String fecha = String.valueOf(pesoEdad.get(pesoEdad.size()-2));
-                                String punto = String.valueOf(pesoEdad.get(pesoEdad.size()-1));
-                                ultimoPeso.setText("Peso: " + punto + "kg" + "\n" + "Fecha: " + fecha);
 
-                                String historiaDato = "";
-                                String historiaFecha = "";
-                                for (int i = pesoEdad.size()-1; i >= 0; i = i - 2) {
-                                    int o = i - 1;
-                                    historiaDato = historiaDato + String.valueOf(pesoEdad.get(i)) + "kg" +"\n";
-                                    historiaFecha = historiaFecha + String.valueOf(pesoEdad.get(o)) +"\n";
+                                if (dataSnapshot.child("Peso de nacimiento").exists()) {
+                                    String peso = dataSnapshot.child("Peso de nacimiento").getValue().toString();
+                                    peso_nacimiento.setText(peso + " kg");
+                                } else {
+                                    peso_nacimiento.setText("");
                                 }
-                                historialPeso.setText(historiaDato);
-                                historialPeso_fecha.setText(historiaFecha);
 
-                                pesoEdad.clear();
-                                datosI_PesoEdad = true;
-                            }
-                            if (dataSnapshot.child("LongitudEdad").exists() && (datosI_LongitudEdad == false)) {
-                                String datosGraficas = "";
-                                datosGraficas = dataSnapshot.child("LongitudEdad").getValue().toString();
-
-                                longitudEdad = Lists.newArrayList(Splitter.on(',').trimResults().omitEmptyStrings().splitToList(datosGraficas));
-                                for (int i = 0; i < longitudEdad.size(); i = i + 2) {
-                                    int o = i + 1;
-
-                                    double X = restarFechas(fecha_nacimiento,longitudEdad.get(i));
-                                    //double X = Double.parseDouble(longitudEdad.get(i));
-                                    double Y = Double.parseDouble(longitudEdad.get(o));
-
-                                    pointLongitud.appendData(new DataPoint(X, Y), true, 1000);
+                                if (dataSnapshot.child("Longitud de nacimiento").exists()) {
+                                    String longitud = dataSnapshot.child("Longitud de nacimiento").getValue().toString();
+                                    longitud_nacimiento.setText(longitud + " cm");
+                                } else {
+                                    longitud_nacimiento.setText("");
                                 }
-                                String fecha = String.valueOf(longitudEdad.get(longitudEdad.size()-2));
-                                String punto = String.valueOf(longitudEdad.get(longitudEdad.size()-1));
-                                ultimoLongitud.setText("Longitud: " + punto + "cm" +"\n" + "Fecha: " + fecha);
 
-                                String historiaDato = "";
-                                String historiaFecha = "";
-                                for (int i = longitudEdad.size()-1; i >= 0; i = i - 2) {
-                                    int o = i - 1;
-                                    historiaDato = historiaDato + String.valueOf(longitudEdad.get(i)) + "cm" +"\n";
-                                    historiaFecha = historiaFecha + String.valueOf(longitudEdad.get(o)) +"\n";
+                                if (dataSnapshot.child("Perimetro de nacimiento").exists()) {
+                                    String perimetro = dataSnapshot.child("Perimetro de nacimiento").getValue().toString();
+                                    perimetro_nacimiento.setText(perimetro + " cm");
+                                } else {
+                                    perimetro_nacimiento.setText("");
                                 }
-                                historialLongitud.setText(historiaDato);
-                                historialLongitud_fecha.setText(historiaFecha);
+                                if (dataSnapshot.child("PesoEdad").exists() && (datosI_PesoEdad == false)) {
+                                    String datosGraficas = "";
+                                    datosGraficas = dataSnapshot.child("PesoEdad").getValue().toString();
 
-                                longitudEdad.clear();
-                                datosI_LongitudEdad = true;
-                            }
-                            if (dataSnapshot.child("CabezaEdad").exists() && (datosI_CabezaEdad == false)) {
-                                String datosGraficas = "";
-                                datosGraficas = dataSnapshot.child("CabezaEdad").getValue().toString();
+                                    pesoEdad = Lists.newArrayList(Splitter.on(',').trimResults().omitEmptyStrings().splitToList(datosGraficas));
+                                    for (int i = 0; i < pesoEdad.size(); i = i + 2) {
+                                        int o = i + 1;
 
-                                cabezaEdad = Lists.newArrayList(Splitter.on(',').trimResults().omitEmptyStrings().splitToList(datosGraficas));
-                                for (int i = 0; i < cabezaEdad.size(); i = i + 2) {
-                                    int o = i + 1;
+                                        double X = restarFechas(fecha_nacimiento, pesoEdad.get(i));
+                                        //double X = Double.parseDouble(pesoEdad.get(i));
+                                        double Y = Double.parseDouble(pesoEdad.get(o));
 
-                                    double X = restarFechas(fecha_nacimiento,cabezaEdad.get(i));
-                                    //double X = Double.parseDouble(cabezaEdad.get(i));
-                                    double Y = Double.parseDouble(cabezaEdad.get(o));
+                                        pointPeso.appendData(new DataPoint(X, Y), true, 1000);
+                                    }
+                                    String fecha = String.valueOf(pesoEdad.get(pesoEdad.size() - 2));
+                                    String punto = String.valueOf(pesoEdad.get(pesoEdad.size() - 1));
+                                    ultimoPeso.setText("Peso: " + punto + "kg" + "\n" + "Fecha: " + fecha);
 
-                                    pointCabeza.appendData(new DataPoint(X, Y), true, 1000);
+                                    String historiaDato = "";
+                                    String historiaFecha = "";
+                                    for (int i = pesoEdad.size() - 1; i >= 0; i = i - 2) {
+                                        int o = i - 1;
+                                        historiaDato = historiaDato + String.valueOf(pesoEdad.get(i)) + "kg" + "\n";
+                                        historiaFecha = historiaFecha + String.valueOf(pesoEdad.get(o)) + "\n";
+                                    }
+                                    historialPeso.setText(historiaDato);
+                                    historialPeso_fecha.setText(historiaFecha);
+
+                                    pesoEdad.clear();
+                                    datosI_PesoEdad = true;
                                 }
-                                String fecha = String.valueOf(cabezaEdad.get(cabezaEdad.size()-2));
-                                String punto = String.valueOf(cabezaEdad.get(cabezaEdad.size()-1));
-                                ultimoCabeza.setText("Perímetro: " + punto + "cm" + "\n" + "Fecha: " + fecha);
+                                if (dataSnapshot.child("LongitudEdad").exists() && (datosI_LongitudEdad == false)) {
+                                    String datosGraficas = "";
+                                    datosGraficas = dataSnapshot.child("LongitudEdad").getValue().toString();
 
-                                String historiaDato = "";
-                                String historiaFecha = "";
-                                for (int i = cabezaEdad.size()-1; i >= 0; i = i - 2) {
-                                    int o = i - 1;
-                                    historiaDato = historiaDato + String.valueOf(cabezaEdad.get(i)) + "cm" +"\n";
-                                    historiaFecha = historiaFecha + String.valueOf(cabezaEdad.get(o)) +"\n";
+                                    longitudEdad = Lists.newArrayList(Splitter.on(',').trimResults().omitEmptyStrings().splitToList(datosGraficas));
+                                    for (int i = 0; i < longitudEdad.size(); i = i + 2) {
+                                        int o = i + 1;
+
+                                        double X = restarFechas(fecha_nacimiento, longitudEdad.get(i));
+                                        //double X = Double.parseDouble(longitudEdad.get(i));
+                                        double Y = Double.parseDouble(longitudEdad.get(o));
+
+                                        pointLongitud.appendData(new DataPoint(X, Y), true, 1000);
+                                    }
+                                    String fecha = String.valueOf(longitudEdad.get(longitudEdad.size() - 2));
+                                    String punto = String.valueOf(longitudEdad.get(longitudEdad.size() - 1));
+                                    ultimoLongitud.setText("Longitud: " + punto + "cm" + "\n" + "Fecha: " + fecha);
+
+                                    String historiaDato = "";
+                                    String historiaFecha = "";
+                                    for (int i = longitudEdad.size() - 1; i >= 0; i = i - 2) {
+                                        int o = i - 1;
+                                        historiaDato = historiaDato + String.valueOf(longitudEdad.get(i)) + "cm" + "\n";
+                                        historiaFecha = historiaFecha + String.valueOf(longitudEdad.get(o)) + "\n";
+                                    }
+                                    historialLongitud.setText(historiaDato);
+                                    historialLongitud_fecha.setText(historiaFecha);
+
+                                    longitudEdad.clear();
+                                    datosI_LongitudEdad = true;
                                 }
-                                historialCabeza.setText(historiaDato);
-                                historialCabeza_fecha.setText(historiaFecha);
+                                if (dataSnapshot.child("CabezaEdad").exists() && (datosI_CabezaEdad == false)) {
+                                    String datosGraficas = "";
+                                    datosGraficas = dataSnapshot.child("CabezaEdad").getValue().toString();
 
-                                cabezaEdad.clear();
-                                datosI_CabezaEdad = true;
-                            }
-                            if (dataSnapshot.child("IMCEdad").exists() && (datosI_IMCEdad == false)) {
-                                String datosGraficas = "";
-                                datosGraficas = dataSnapshot.child("IMCEdad").getValue().toString();
+                                    cabezaEdad = Lists.newArrayList(Splitter.on(',').trimResults().omitEmptyStrings().splitToList(datosGraficas));
+                                    for (int i = 0; i < cabezaEdad.size(); i = i + 2) {
+                                        int o = i + 1;
 
-                                IMEEdad = Lists.newArrayList(Splitter.on(',').trimResults().omitEmptyStrings().splitToList(datosGraficas));
-                                for (int i = 0; i < IMEEdad.size(); i = i + 2) {
-                                    int o = i + 1;
+                                        double X = restarFechas(fecha_nacimiento, cabezaEdad.get(i));
+                                        //double X = Double.parseDouble(cabezaEdad.get(i));
+                                        double Y = Double.parseDouble(cabezaEdad.get(o));
 
-                                    double X = restarFechas(fecha_nacimiento,IMEEdad.get(i));
-                                    //double X = Double.parseDouble(IMEEdad.get(i));
-                                    double Y = Double.parseDouble(IMEEdad.get(o));
+                                        pointCabeza.appendData(new DataPoint(X, Y), true, 1000);
+                                    }
+                                    String fecha = String.valueOf(cabezaEdad.get(cabezaEdad.size() - 2));
+                                    String punto = String.valueOf(cabezaEdad.get(cabezaEdad.size() - 1));
+                                    ultimoCabeza.setText("Perímetro: " + punto + "cm" + "\n" + "Fecha: " + fecha);
 
-                                    pointIMC.appendData(new DataPoint(X, Y), true, 1000);
+                                    String historiaDato = "";
+                                    String historiaFecha = "";
+                                    for (int i = cabezaEdad.size() - 1; i >= 0; i = i - 2) {
+                                        int o = i - 1;
+                                        historiaDato = historiaDato + String.valueOf(cabezaEdad.get(i)) + "cm" + "\n";
+                                        historiaFecha = historiaFecha + String.valueOf(cabezaEdad.get(o)) + "\n";
+                                    }
+                                    historialCabeza.setText(historiaDato);
+                                    historialCabeza_fecha.setText(historiaFecha);
+
+                                    cabezaEdad.clear();
+                                    datosI_CabezaEdad = true;
                                 }
-                                String fecha = String.valueOf(IMEEdad.get(IMEEdad.size()-2));
-                                double punto = Double.parseDouble(IMEEdad.get(IMEEdad.size()-1));
-                                String puntoSalida = String.format("%.2f",punto);
-                                ultimoIMC.setText("IMC: " + puntoSalida + "kg/m2" +"\n" + "Fecha: " + fecha);
+                                if (dataSnapshot.child("IMCEdad").exists() && (datosI_IMCEdad == false)) {
+                                    String datosGraficas = "";
+                                    datosGraficas = dataSnapshot.child("IMCEdad").getValue().toString();
 
-                                String historiaDato = "";
-                                String historiaFecha = "";
-                                for (int i = IMEEdad.size()-1; i >= 0; i = i - 2) {
-                                    int o = i - 1;
-                                    double punto1 = Double.parseDouble(IMEEdad.get(i));
-                                    historiaDato = historiaDato + String.format("%.2f",punto1) + "kg/m2" +"\n";
-                                    historiaFecha = historiaFecha + String.valueOf(IMEEdad.get(o)) +"\n";
+                                    IMEEdad = Lists.newArrayList(Splitter.on(',').trimResults().omitEmptyStrings().splitToList(datosGraficas));
+                                    for (int i = 0; i < IMEEdad.size(); i = i + 2) {
+                                        int o = i + 1;
+
+                                        double X = restarFechas(fecha_nacimiento, IMEEdad.get(i));
+                                        //double X = Double.parseDouble(IMEEdad.get(i));
+                                        double Y = Double.parseDouble(IMEEdad.get(o));
+
+                                        pointIMC.appendData(new DataPoint(X, Y), true, 1000);
+                                    }
+                                    String fecha = String.valueOf(IMEEdad.get(IMEEdad.size() - 2));
+                                    double punto = Double.parseDouble(IMEEdad.get(IMEEdad.size() - 1));
+                                    String puntoSalida = String.format("%.2f", punto);
+                                    ultimoIMC.setText("IMC: " + puntoSalida + "kg/m2" + "\n" + "Fecha: " + fecha);
+
+                                    String historiaDato = "";
+                                    String historiaFecha = "";
+                                    for (int i = IMEEdad.size() - 1; i >= 0; i = i - 2) {
+                                        int o = i - 1;
+                                        double punto1 = Double.parseDouble(IMEEdad.get(i));
+                                        historiaDato = historiaDato + String.format("%.2f", punto1) + "kg/m2" + "\n";
+                                        historiaFecha = historiaFecha + String.valueOf(IMEEdad.get(o)) + "\n";
+                                    }
+                                    historialIMC.setText(historiaDato);
+                                    historialIMC_fecha.setText(historiaFecha);
+
+                                    IMEEdad.clear();
+                                    datosI_IMCEdad = true;
                                 }
-                                historialIMC.setText(historiaDato);
-                                historialIMC_fecha.setText(historiaFecha);
-
-                                IMEEdad.clear();
-                                datosI_IMCEdad = true;
                             }
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
                             nombreHijo.setText("Null");
                             edadHijo.setText("Null");
-                            fechaActualizacion.setText("Null");
-
                         }
                     });
                 } else {
@@ -438,6 +471,110 @@ public class GraficasPadreNinoActivity extends AppCompatActivity {
         double resultado = (double) dias/30;
         return resultado;
         //String meses = Double.toString(mes);
+    }
+
+    public String edadActual(String fechaNac){
+        ArrayList<String> fechaNacimiento;
+        ArrayList<String> fechaActual;
+
+        Date hoy = new Date();
+        DateFormat fechaHoy = new SimpleDateFormat("dd/MM/yyyy");
+        String fecha = fechaHoy.format(hoy);
+
+        fechaNacimiento = Lists.newArrayList(Splitter.on('/').trimResults().omitEmptyStrings().splitToList(fechaNac));
+        fechaActual     = Lists.newArrayList(Splitter.on('/').trimResults().omitEmptyStrings().splitToList(fecha));
+
+        Integer anoNac = Integer.valueOf(fechaNacimiento.get(2));
+        Integer mesNac = Integer.valueOf(fechaNacimiento.get(1));
+        Integer diaNac = Integer.valueOf(fechaNacimiento.get(0));
+
+        Integer anoHoy = Integer.valueOf(fechaActual.get(2));
+        Integer mesHoy = Integer.valueOf(fechaActual.get(1));
+        Integer diaHoy = Integer.valueOf(fechaActual.get(0));
+
+        int ano;
+        int mes;
+        int dia;
+
+        if(mesHoy >= mesNac){
+            ano = anoHoy - anoNac;
+            mes = mesHoy - mesNac;
+        } else {
+            ano = anoHoy - anoNac - 1;
+            mes = mesHoy + (12 - mesNac);
+        }
+        if(diaHoy >= diaNac){
+            dia = diaHoy - diaNac;
+        } else{
+            mes = mes - 1;
+            dia = diaHoy + (30 - diaNac);
+        }
+
+        String edadActual = "";
+        if (ano > 1){
+            if(mes > 1 && dia > 1){
+                edadActual = ano + " años, " + mes + " meses y " + dia + " días";
+            } else if(mes > 1 && dia == 1){
+                edadActual = ano + " años, " + mes + " meses y " + dia + " día";
+            } else if(mes > 1 && dia == 0){
+                edadActual = ano + " años, " + mes + " meses";
+            } else if(mes == 1 && dia > 1){
+                edadActual = ano + " años, " + mes + " mes y " + dia + " días";
+            } else if(mes == 1 && dia == 1){
+                edadActual = ano + " años, " + mes + " mes y " + dia + " día";
+            } else if(mes == 1 && dia <= 0){
+                edadActual = ano + " años, " + mes + " mes";
+            } else if(mes <= 0 && dia > 1){
+                edadActual = ano + " años y " + dia + " días";
+            } else if(mes <= 0 && dia == 1){
+                edadActual = ano + " años y " + dia + " día";
+            } else if(mes <= 0 && dia <= 0) {
+                edadActual = ano + " años";
+            }
+        } else if (ano == 1){
+            if(mes > 1 && dia > 1){
+                edadActual = ano + " año, " + mes + " meses y " + dia + " días";
+            } else if(mes > 1 && dia == 1){
+                edadActual = ano + " año, " + mes + " meses y " + dia + " día";
+            } else if(mes > 1 && dia == 0){
+                edadActual = ano + " año, " + mes + " meses";
+            } else if(mes == 1 && dia > 1){
+                edadActual = ano + " año, " + mes + " mes y " + dia + " días";
+            } else if(mes == 1 && dia == 1){
+                edadActual = ano + " año, " + mes + " mes y " + dia + " día";
+            } else if(mes == 1 && dia <= 0){
+                edadActual = ano + " año, " + mes + " mes";
+            } else if(mes <= 0 && dia > 1){
+                edadActual = ano + " año y " + dia + " días";
+            } else if(mes <= 0 && dia == 1){
+                edadActual = ano + " año y " + dia + " día";
+            } else if(mes <= 0 && dia <= 0) {
+                edadActual = ano + " año";
+            }
+        } else {
+            if(mes > 1 && dia > 1){
+                edadActual = mes + " meses y " + dia + " días";
+            } else if(mes > 1 && dia == 1){
+                edadActual = mes + " meses y " + dia + " día";
+            } else if(mes > 1 && dia == 0){
+                edadActual = mes + " meses";
+            } else if(mes == 1 && dia > 1){
+                edadActual = mes + " mes y " + dia + " días";
+            } else if(mes == 1 && dia == 1){
+                edadActual = mes + " mes y " + dia + " día";
+            } else if(mes == 1 && dia <= 0){
+                edadActual = mes + " mes";
+            } else if(mes <= 0 && dia > 1){
+                edadActual = dia + " días";
+            } else if(mes <= 0 && dia == 1){
+                edadActual = dia + " día";
+            } else if(mes <= 0 && dia <= 0) {
+                edadActual = "Error";
+            }
+        }
+        edadActual = "Edad: " + edadActual;
+
+        return edadActual;
     }
 
     @Override

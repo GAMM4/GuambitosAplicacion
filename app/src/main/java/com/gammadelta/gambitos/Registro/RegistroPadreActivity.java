@@ -76,8 +76,8 @@ public class RegistroPadreActivity extends AppCompatActivity implements View.OnC
 
     private void registrarPadre(){
         final String nombre = nombre_padre.getText().toString().trim();
-        String correo = correo_padre.getText().toString().trim();
-        String contraseña = crear_contraseña.getText().toString().trim();
+        final String correo = correo_padre.getText().toString().trim();
+        final String contraseña = crear_contraseña.getText().toString().trim();
         final String pregunta = pregunta_seguridad.getText().toString().trim();
         final String respuesta = respuesta_seguridad.getText().toString().trim();
         final String pin = String.format("%.0f",pin_creado);
@@ -111,6 +111,8 @@ public class RegistroPadreActivity extends AppCompatActivity implements View.OnC
                             databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(userID).child("Respuesta").setValue(respuesta);
                             databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(userID).child("Padre").setValue(true);
                             databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(userID).child("PIN").setValue(pin);
+                            databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(userID).child("Correo").setValue(correo);
+                            databaseReference.child(USUARIO_NODE).child(PADRE_NODE).child(userID).child("Contraseña").setValue(contraseña);
 
                             Intent i = new Intent(RegistroPadreActivity.this, RegistroPadreDosActivity.class);
                             startActivity(i);

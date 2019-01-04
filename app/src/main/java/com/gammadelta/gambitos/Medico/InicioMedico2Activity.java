@@ -29,8 +29,6 @@ import com.google.firebase.database.ValueEventListener;
 import static com.gammadelta.gambitos.Login.IngresoMedicoIndependiente.documento_medic;
 
 public class InicioMedico2Activity extends AppCompatActivity {
-    private TextView texto;
-    private Typeface coolvetica;
 
     private static final String USUARIO_NODE = "Usuarios";
     private static final String PADRE_NODE = "Padres";
@@ -56,10 +54,6 @@ public class InicioMedico2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio_medico2);
-
-        String fuente1  = "fuentes/coolvetica.ttf";
-        this.coolvetica = Typeface.createFromAsset(this.getAssets(), fuente1);
-        this.texto      = (TextView)this.findViewById(R.id.graficas_padre);
 
         id_hijo             = (EditText)    findViewById(R.id.documento_identidad_hijo_medico);
         pin_padre           = (EditText)    findViewById(R.id.pin_padre_medico);
