@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.gammadelta.gambitos.Graficas.GraficasMedicoNinoActivity;
 import com.gammadelta.gambitos.OlvidoContrasena.ContrasenaPadreUnoActivity;
 import com.gammadelta.gambitos.Padre.InicioPadresActivity;
+import com.gammadelta.gambitos.Padre.PruebaActivity;
 import com.gammadelta.gambitos.R;
 import com.gammadelta.gambitos.Registro.RegistroActivity;
 import com.google.android.gms.tasks.OnCompleteListener;

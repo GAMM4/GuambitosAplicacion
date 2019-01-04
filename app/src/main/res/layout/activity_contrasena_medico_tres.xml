@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OlvidoContrasena.ContrasenaMedicoTresActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <ImageView
+                android:id="@+id/menu_atras"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_atras" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="30dp"
+                android:text="Nueva contraseña"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"/>
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginRight="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Recuperar contraseña"
+                android:textSize="25sp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:layout_marginLeft="10dp"
+                android:textAlignment="textStart"
+                android:fontFamily="@font/coolvetica"
+                android:textColor="@color/colorPrimary"
+                android:gravity="start"
+                android:layout_gravity="start" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Contraseña nueva"
+                android:textSize="20sp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:layout_marginLeft="20dp"
+                android:textAlignment="textStart"
+                android:textColor="@color/editText2"
+                android:layout_marginTop="20dp"
+                android:gravity="start"
+                android:layout_gravity="start" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/boton_redondo_negro"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                app:hintEnabled="false">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/nueva_contrasena1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@null"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:inputType="textPassword"
+                    android:hint="Contraseña nueva"
+                    android:textSize="@dimen/size_edittext"
+                    android:paddingHorizontal="20dp"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Repetir contraseña"
+                android:textSize="20sp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:layout_marginLeft="20dp"
+                android:textAlignment="textStart"
+                android:textColor="@color/editText2"
+                android:layout_marginTop="10dp"
+                android:gravity="start"
+                android:layout_gravity="start" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/boton_redondo_negro"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                app:hintEnabled="false">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/nueva_contrasena2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@null"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:inputType="textPassword"
+                    android:hint="Repetir contraseña"
+                    android:textSize="@dimen/size_edittext"
+                    android:paddingHorizontal="20dp"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/guardar_contraseña"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Guardar cambios"
+                android:textSize="@dimen/size_botones"
+                android:textColor="@drawable/texto_boton_redondo"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:background="@drawable/boton_redondo_relleno"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="30dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+</RelativeLayout>
