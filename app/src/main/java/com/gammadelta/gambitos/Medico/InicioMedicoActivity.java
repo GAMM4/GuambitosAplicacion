@@ -3,10 +3,16 @@ package com.gammadelta.gambitos.Medico;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +20,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gammadelta.gambitos.Graficas.GraficasMedicoNinoActivity;
+import com.gammadelta.gambitos.Login.IngresarActivity;
+import com.gammadelta.gambitos.Login.IngresoMedicoIndependiente;
+import com.gammadelta.gambitos.Padre.InicioPadresActivity;
 import com.gammadelta.gambitos.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,7 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import static com.gammadelta.gambitos.Login.IngresoMedicoIndependiente.documento_medic;
 
-public class InicioMedicoActivity extends AppCompatActivity {
+public class InicioMedicoActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String USUARIO_NODE = "Usuarios";
     private static final String PADRE_NODE = "Padres";
     private static final String MEDICO_NODE = "Medicos";
@@ -45,7 +54,18 @@ public class InicioMedicoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inicio_medico);
+        setContentView(R.layout.activity_navigation_medico);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_medico);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_medico);
+        navigationView.setNavigationItemSelectedListener(this);
 
         nombreMedico        = (TextView)   findViewById(R.id.nombre_medico);
         curva_crecimiento   = (CardView)   findViewById(R.id.curva_crecimiento);
@@ -95,9 +115,54 @@ public class InicioMedicoActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_editar) {
+            // Handle the camera action
+        //} else if (id == R.id.nav_editar) {
+
+            //} else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_ajustes) {
+
+            //} else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_cerrar_sesion) {
+            Intent o = new Intent(InicioMedicoActivity.this, IngresarActivity.class);
+            startActivity(o);
+            signOut();
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         firebaseAuth.addAuthStateListener(mAuthListener);
     }
 
+    private void signOut(){
+        firebaseAuth.signOut();
+        updateUI(null);
+    }
+
+    private void updateUI(FirebaseUser currentUser) {
+    }
 }

@@ -5,10 +5,6 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_hijo"
-            android:icon="@drawable/ic_add_hijo"
-            android:title="Agregar hijo" />
-        <item
             android:id="@+id/nav_editar"
             android:icon="@drawable/ic_editar"
             android:title="Editar información" />

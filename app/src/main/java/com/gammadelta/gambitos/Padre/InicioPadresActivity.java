@@ -108,8 +108,8 @@ public class InicioPadresActivity extends AppCompatActivity implements Navigatio
         //loadData();
 
 
-        nombre_padre = (TextView) findViewById(R.id.nombre_padre);
-        pin = (TextView) findViewById(R.id.pin);
+        nombre_padre        = (TextView) findViewById(R.id.nombre_padre);
+        pin                 = (TextView) findViewById(R.id.pin);
 
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
@@ -211,20 +211,21 @@ public class InicioPadresActivity extends AppCompatActivity implements Navigatio
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_hijo) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_editar) {
 
-        } else if (id == R.id.nav_slideshow) {
+        //} else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_ajustes) {
 
         //} else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_cerrar_sesion) {
             Intent o = new Intent(InicioPadresActivity.this, IngresarActivity.class);
             startActivity(o);
             signOut();

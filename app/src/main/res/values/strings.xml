@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Güambitos</string>
     <string name="title_activity_inicio_padres">Güambitos</string>
+    <string name="title_activity_inicio_medico">Güambitos</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>

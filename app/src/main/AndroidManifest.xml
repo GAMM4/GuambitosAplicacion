@@ -31,6 +31,8 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".Medico.InicioMedicoActivity"
+            android:label="@string/title_activity_inicio_medico"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Medico.InicioMedico2Activity"
